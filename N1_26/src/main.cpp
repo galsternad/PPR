@@ -3,6 +3,8 @@
 #include <ostream>
 #include <vector>
 
+#include "sequence_generator.hpp"
+
 const std::vector<std::vector<int>> testArrays = {
     { 1, -1, 1, 1, 1 },
     { -1, 1, 1, 1, -1, 1 },
@@ -14,7 +16,7 @@ const std::vector<std::vector<int>> testArrays = {
     { -1, -1, -1, 1, 1, 1, -1, 1, 1, -1, 1, 1 }
 };
 
-std::vector<int> calculateC(std::vector<int> S) {
+std::vector<int> calculateC(const std::vector<int>& S) {
     std::vector<int> result;
     
     int L = S.size();
@@ -32,7 +34,7 @@ std::vector<int> calculateC(std::vector<int> S) {
     return result;
 }
 
-int calculatePeakSidelobeLevel(std::vector<int> C) {
+int calculatePeakSidelobeLevel(const std::vector<int>& C) {
     if(C.size() < 2) {
         return 0;
     }
@@ -52,17 +54,22 @@ int calculatePeakSidelobeLevel(std::vector<int> C) {
     return max;
 }
 
-void squareC(std::vector<int>& C) {
+std::vector<int> squareC(const std::vector<int>& C) {
+    std::vector<int> cSquared(C);
+    
     for(int k = 1; k < C.size(); k++) {
-        C[k] *= C[k];
+        cSquared[k] *= C[k];
     }
+
+    return cSquared;
 }
 
-float calculateMeritFactor(std::vector<int> S, std::vector<int> C) {
+float calculateMeritFactor(const std::vector<int>& S, const std::vector<int>& C) {
     float result = 0.0f;
     unsigned int L = S.size();
-    squareC(C);
-    int sumC = std::accumulate(C.begin() + 1, C.end(), 0);
+    std::vector<int> squaredC = squareC(C);
+
+    int sumC = std::accumulate(squaredC.begin() + 1, squaredC.end(), 0);
 
     result = (float)(L * L) / (float)(2 * sumC);
 
@@ -74,17 +81,18 @@ int main() {
         std::vector<int> S = it;
         std::vector<int> C = calculateC(S);
 
-        /*
-        for(auto i : C) {
-            std::cout << i << " ";
-        }
-        std::cout << std::endl;
-        */
-
         int peakSidelobeLevel = calculatePeakSidelobeLevel(C);
         float meritFactor = calculateMeritFactor(S, C);
     
-        std::cout << "PSL: " << peakSidelobeLevel << std::endl;
-        std::cout << "MF: " << meritFactor << std::endl;
+        std::cout << "PSL: " << peakSidelobeLevel << ", MF: "<< meritFactor << std::endl;
     }
+
+    SequenceGenerator* generator = new SequenceGenerator(time(nullptr));
+    auto h = generator->generateSequence(10);
+
+    for(auto i : h) {
+        std::cout << i;
+    }
+ 
+    delete generator;
 }
