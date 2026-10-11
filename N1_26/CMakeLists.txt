@@ -13,4 +13,6 @@ target_sources(main
         "src/sequence_generator.cpp"
         "src/solver.hpp"
         "src/solver.cpp"
+        "src/calculator.hpp"
+        "src/calculator.cpp"
 )
