@@ -17,5 +17,8 @@ int main() {
     Solver* solver = new Solver(600, time(nullptr), 100, 1);
     solver->randomSearch();
 
+    std::cout << solver->toString() << std::endl;
+    std::cout << solver->getSequence().toString() << std::endl;
+
     delete solver;
 }

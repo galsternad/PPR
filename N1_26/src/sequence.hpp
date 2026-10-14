@@ -37,6 +37,8 @@ class Sequence {
         inline unsigned int getPeakSidelobeLevel() const { return this->peakSidelobeLevel; }
         inline void setPeakSidelobeLevel(unsigned int peakSidelobeLevel) { this->peakSidelobeLevel = peakSidelobeLevel; }
 
+        const std::string toString() const;
+        
         std::vector<bool> toBinaryVector() const;
         std::string toBinaryString() const;
         std::string toHexadecimalString(std::string binaryString) const;

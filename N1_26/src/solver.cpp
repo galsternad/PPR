@@ -1,5 +1,22 @@
 #include "solver.hpp"
 #include <limits>
+#include <sstream>
+
+const std::string Solver::toString() const {
+    std::stringstream ss;
+
+    ss << "L: " << this->L << "\n";
+    ss << "seed: " << this->seed << "\n";
+    ss << "max evaluations: " << this->nfesLmt << "\n";
+    ss << "threads: " << this->threads << "\n";
+    ss << "number of evaluations: " << this->nfes << "\n";
+    ss << "runtime: " << this->runtime << "\n";
+    ss << "cpu time: " << this->cpuTime << "\n";
+    ss << "energy consumption: " << this->energyConsumption << "\n";
+    ss << "speed: " << this->speed << "\n";
+
+    return ss.str();
+}
 
 void Solver::randomSearch() {
     for(unsigned int i = 0; i < this->nfesLmt; i++) {

@@ -1,4 +1,13 @@
 #include "sequence.hpp"
+#include <sstream>
+
+const std::string Sequence::toString() const {
+    std::stringstream ss;
+
+    ss << "MF: " << this->meritFactor << ", PSL: " << this->peakSidelobeLevel << "."; 
+
+    return ss.str();
+}
 
 std::vector<bool> Sequence::toBinaryVector() const {
     std::vector<bool> result = std::vector<bool>(this->S.size());
@@ -19,8 +28,8 @@ std::vector<bool> Sequence::toBinaryVector() const {
 std::string Sequence::toBinaryString() const {
     std::string result = "";
 
-    for(auto it : this->S) {
-        switch(it) {
+    for(auto i : this->S) {
+        switch(i) {
             case -1:
                 result += "1";
                 break;

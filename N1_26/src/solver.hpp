@@ -10,7 +10,7 @@ class Solver {
         const unsigned int nfesLmt;
         const unsigned int threads;
         unsigned int nfes;
-        unsigned int runTime;
+        unsigned int runtime;
         unsigned int cpuTime;
         unsigned int energyConsumption;
         unsigned int speed;
@@ -25,13 +25,15 @@ class Solver {
             const unsigned int nfesLmt = 1000,
             const unsigned int threads = 1
         ) : generator(seed), L(L), seed(seed), nfesLmt(nfesLmt), 
-            threads(threads), nfes(0), runTime(0), cpuTime(0), 
+            threads(threads), nfes(0), runtime(0), cpuTime(0), 
             energyConsumption(0), speed(0), sequence() {
             
         }
 
-        inline unsigned int getRunTime() const { return this->runTime; }
+        inline unsigned int getRunTime() const { return this->runtime; }
         inline const Sequence& getSequence() const { return this->sequence; }
+
+        const std::string toString() const;
 
         void randomSearch();
 
