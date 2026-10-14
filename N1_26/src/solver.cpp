@@ -19,7 +19,7 @@ void Solver::randomSearch() {
 }
 
 unsigned int Solver::valueFlipEval(const Sequence& S) {
-    unsigned int index = 0;
+    unsigned int bestIndex = 0;
     unsigned int bestEnergy = std::numeric_limits<unsigned int>::max();
 
     for(unsigned int i = 0; i < S.getS().size(); i++) {
@@ -31,11 +31,11 @@ unsigned int Solver::valueFlipEval(const Sequence& S) {
 
         if(energy < bestEnergy) {
             bestEnergy = energy;
-            index = i;
+            bestIndex = i;
         }
     }
 
-    return index;
+    return bestIndex;
 }
 
 void Solver::evaluateNeighbours() {
