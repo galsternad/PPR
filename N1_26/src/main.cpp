@@ -14,9 +14,8 @@ const std::vector<std::vector<int>> testArrays = {
 };
 
 int main() {
-    Solver* solver = new Solver(600, time(nullptr), 100000, 1);
-    solver->solveNaive();
-    std::cout << solver->getRunTime() << std::endl;
+    Solver* solver = new Solver(600, time(nullptr), 100, 1);
+    solver->randomSearch();
 
     delete solver;
 }

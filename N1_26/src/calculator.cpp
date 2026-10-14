@@ -1,14 +1,31 @@
 #include "calculator.hpp"
+#include <numeric>
 
-std::vector<int> Calculator::naiveCalculateC(const std::vector<int>& S) {
-    int L = S.size();
+std::vector<std::vector<int>> Calculator::calculateT(const std::vector<int>& S) {
+    unsigned int L = S.size();
+    std::vector<std::vector<int>> result;
+
+    for(unsigned int k = 0; k < L; k++) {
+        std::vector<int> t(L - k);
+
+        for(unsigned int i = 0; i < L - k; i++) {
+            t[i] = S[i] * S[i + k];
+        }
+
+        result.push_back(t);
+    }
+
+    return result;
+}
+
+std::vector<int> Calculator::calculateC(const std::vector<int>& S) {
+    unsigned int L = S.size();
     std::vector<int> result(L);
     
-
-    for(int k = 0; k < L; k++) {
+    for(unsigned int k = 0; k < L; k++) {
         int sum = 0;
 
-        for(int i = 0; i < L - k; i++) {
+        for(unsigned int i = 0; i < L - k; i++) {
             sum += S[i] * S[i + k];
         }
     
@@ -18,7 +35,31 @@ std::vector<int> Calculator::naiveCalculateC(const std::vector<int>& S) {
     return result;
 }
 
-int Calculator::calculatePeakSidelobeLevel(const std::vector<int>& C) {
+std::vector<int> Calculator::calculateSquaredC(const std::vector<int>& C) {
+    std::vector<int> result(C);
+    
+    for(unsigned int k = 1; k < C.size(); k++) {
+        result[k] *= C[k];
+    }
+
+    return result;
+}
+
+unsigned int Calculator::calculateEnergy(const std::vector<int>& C) {
+    if(C.size() < 2) {
+        return 0;
+    }
+
+    if(C.size() == 2) {
+        return C[1] * C[1];
+    }
+
+    std::vector<int> squaredAutocorrelations = calculateSquaredC(C);
+
+    return std::accumulate(squaredAutocorrelations.begin() + 1, squaredAutocorrelations.end(), 0U);
+}
+
+unsigned int Calculator::calculatePeakSidelobeLevel(const std::vector<int>& C) {
     if(C.size() < 2) {
         return 0;
     }
@@ -27,9 +68,9 @@ int Calculator::calculatePeakSidelobeLevel(const std::vector<int>& C) {
         return abs(C[1]);
     }
     
-    int max = abs(C[1]);
+    unsigned int max = abs(C[1]);
     
-    for(int k = 2; k < C.size(); k++) {
+    for(unsigned int k = 2; k < C.size(); k++) {
         if(abs(C[k]) > max) {
             max = abs(C[k]);
         }
@@ -38,24 +79,17 @@ int Calculator::calculatePeakSidelobeLevel(const std::vector<int>& C) {
     return max;
 }
 
-std::vector<int> Calculator::squareC(const std::vector<int>& C) {
-    std::vector<int> cSquared(C);
-    
-    for(int k = 1; k < C.size(); k++) {
-        cSquared[k] *= C[k];
+double Calculator::calculateMeritFactor(const std::vector<int>& S, const std::vector<int>& C) {
+    double result = 0.0f;
+
+    unsigned int L = S.size();
+    unsigned int energy = calculateEnergy(C);
+
+    if(energy == 0) {
+        return 0.0;
     }
 
-    return cSquared;
-}
-
-float Calculator::calculateMeritFactor(const std::vector<int>& S, const std::vector<int>& C) {
-    float result = 0.0f;
-    unsigned int L = S.size();
-    std::vector<int> squaredC = squareC(C);
-
-    int sumC = std::accumulate(squaredC.begin() + 1, squaredC.end(), 0);
-
-    result = (float)(L * L) / (float)(2 * sumC);
+    result = (double)(L * L) / (float)(2 * energy);
 
     return result;
 }
