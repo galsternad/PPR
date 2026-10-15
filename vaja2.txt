@@ -1,0 +1,32 @@
+Vaja 2:
+
+1 nit je tista, ki proizvaja opravila -> glavna nit
+ostale niti, ki so potrošniki -> bodo iz vrste jemale zaporedja in jih ovrednotila => ta postopek ponavljajo,
+dokler ne dobijo signala, da se zaključijo => ZA TO POTREBUJEMO SINHRONIZIRANO VRSTO
+
+posredovanje ocene glavni niti -> še ena sinhronizirana vrsta, ki pošilja podatke nazaj glavni niti
+
+čakanje glavne niti na prazno vrsto in zaustavljanje niti -> moramo počakati, da vse niti končajo z delom => pogojne spremenljivke
+
+pogojne spremenljivke:
+	- #include <condition_variable>
+	- potrebujemo tudi <mutex> in <thread>
+
+funkcija niti:
+	zaklenemo mutex (pogojno spremenljivko)
+
+zakaj se postavita dva mutexa?
+	- ker se lahko funkcija zažene prej kot pa mutex znotraj main()
+
+implementacija brez pogojnih spremenljivk ves čas obremenjuje procesorja po nepotrebnem (v primeru, da skozi laufa npr. while zanka)
+
+sinhronizirana vrsta: implementacija/definicija na PPT 33. strani
+
+analiza:
+	- za vsako število 25 naključnih zagonov z random seed
+	- preverjamo kako se je povprečni MF izboljševal
+	- merimo povprečen čas, ki ga program potrebuje za X MF
+	- preverjamo, kako se povprečni časi izboljšujejo/nižajo
+
+prepustnost:
+	- kako se poveča hitrost s številom ovrednotenj na sekundo glede na povečanje števila niti

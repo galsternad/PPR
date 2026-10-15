@@ -3,33 +3,44 @@
 
 class Sequence {
     private:
-        std::vector<int> sequence;
-        std::vector<int> autocorrelationVector;
+        std::vector<int> S;
+        std::vector<int> C;
         double meritFactor;
         unsigned int peakSidelobeLevel;
+        unsigned int energy;
     
     public:
         Sequence() :
-            sequence(std::vector<int> { }),
-            autocorrelationVector(std::vector<int> { }),
+            S(std::vector<int> { }),
+            C(std::vector<int> { }),
             meritFactor(0),
-            peakSidelobeLevel(0) { }
+            peakSidelobeLevel(0),
+            energy(0) { }
+
+        Sequence(const std::vector<int>& S) :
+            S(S),
+            C(std::vector<int> { }),
+            meritFactor(0),
+            peakSidelobeLevel(0),
+            energy(0) { }
 
         Sequence(
-            const std::vector<int>& sequence,
-            const std::vector<int>& autocorrelationVector,
+            const std::vector<int>& S,
+            const std::vector<int>& C,
             const double meritFactor,
-            const unsigned int peakSidelobeLevel
-        ) : sequence(sequence),
-            autocorrelationVector(autocorrelationVector),
+            const unsigned int peakSidelobeLevel,
+            const unsigned int energy
+        ) : S(S),
+            C(C),
             meritFactor(meritFactor), 
-            peakSidelobeLevel(peakSidelobeLevel) { }
+            peakSidelobeLevel(peakSidelobeLevel),
+            energy(energy) { }
 
-        inline const std::vector<int>& getSequence() const { return this->sequence; }
-        inline void setSequence(const std::vector<int>& sequence) { this->sequence = sequence; }
+        inline const std::vector<int>& getS() const { return this->S; }
+        inline void setS(const std::vector<int>& S) { this->S = S; }
 
-        inline const std::vector<int>& getAutocorrelationVector() const { return this->autocorrelationVector; }
-        inline void setAutocorrelationVector(const std::vector<int>& autocorrelationVector) { this->autocorrelationVector = autocorrelationVector; }
+        inline const std::vector<int>& getC() const { return this->C; }
+        inline void setC(const std::vector<int>& C) { this->C = C; }
 
         inline double getMeritFactor() const { return this->meritFactor; }
         inline void setMeritFactor(double meritFactor) { this->meritFactor = meritFactor; }
@@ -37,6 +48,11 @@ class Sequence {
         inline unsigned int getPeakSidelobeLevel() const { return this->peakSidelobeLevel; }
         inline void setPeakSidelobeLevel(unsigned int peakSidelobeLevel) { this->peakSidelobeLevel = peakSidelobeLevel; }
 
+        inline unsigned int getEnergy() const { return this->energy; }
+        inline void setEnergy(unsigned int energy) { this->energy = energy; }
+
+        const std::string toString() const;
+        
         std::vector<bool> toBinaryVector() const;
         std::string toBinaryString() const;
         std::string toHexadecimalString(std::string binaryString) const;

@@ -15,4 +15,6 @@ target_sources(main
         "src/solver.cpp"
         "src/calculator.hpp"
         "src/calculator.cpp"
+        "src/sequence.hpp"
+        "src/sequence.cpp"
 )
