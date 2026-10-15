@@ -10,4 +10,5 @@ class Calculator {
         static unsigned int calculateEnergy(const std::vector<int>& C);
         static unsigned int calculatePeakSidelobeLevel(const std::vector<int>& C);
         static double calculateMeritFactor(const std::vector<int>& S, const std::vector<int>& C);
+        static double calculateMeritFactor(const std::vector<int>& S, const std::vector<int>& C, unsigned int energy);
 };
