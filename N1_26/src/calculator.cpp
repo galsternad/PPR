@@ -3,7 +3,7 @@
 
 std::vector<std::vector<int>> Calculator::calculateT(const std::vector<int>& S) {
     unsigned int L = S.size();
-    std::vector<std::vector<int>> result;
+    std::vector<std::vector<int>> result(L);
 
     for(unsigned int k = 0; k < L; k++) {
         std::vector<int> t(L - k);
@@ -12,7 +12,7 @@ std::vector<std::vector<int>> Calculator::calculateT(const std::vector<int>& S) 
             t[i] = S[i] * S[i + k];
         }
 
-        result.push_back(t);
+        result[k] = t;
     }
 
     return result;
@@ -80,16 +80,26 @@ unsigned int Calculator::calculatePeakSidelobeLevel(const std::vector<int>& C) {
 }
 
 double Calculator::calculateMeritFactor(const std::vector<int>& S, const std::vector<int>& C) {
-    double result = 0.0f;
-
     unsigned int L = S.size();
     unsigned int energy = calculateEnergy(C);
-
+    
     if(energy == 0) {
         return 0.0;
     }
+    
+    return (double)(L * L) / (double)(2 * energy);
+}
 
-    result = (double)(L * L) / (float)(2 * energy);
+double Calculator::calculateMeritFactor(
+    const std::vector<int> &S, 
+    const std::vector<int> &C, 
+    unsigned int energy
+) { 
+    unsigned int L = S.size();
 
-    return result;
+    if(energy == 0) {
+        return 0;
+    }
+
+    return (double)(L * L) / (double)(2 * energy);
 }

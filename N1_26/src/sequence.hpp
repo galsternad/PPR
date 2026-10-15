@@ -7,23 +7,34 @@ class Sequence {
         std::vector<int> C;
         double meritFactor;
         unsigned int peakSidelobeLevel;
+        unsigned int energy;
     
     public:
         Sequence() :
             S(std::vector<int> { }),
             C(std::vector<int> { }),
             meritFactor(0),
-            peakSidelobeLevel(0) { }
+            peakSidelobeLevel(0),
+            energy(0) { }
+
+        Sequence(const std::vector<int>& S) :
+            S(S),
+            C(std::vector<int> { }),
+            meritFactor(0),
+            peakSidelobeLevel(0),
+            energy(0) { }
 
         Sequence(
             const std::vector<int>& S,
             const std::vector<int>& C,
             const double meritFactor,
-            const unsigned int peakSidelobeLevel
+            const unsigned int peakSidelobeLevel,
+            const unsigned int energy
         ) : S(S),
             C(C),
             meritFactor(meritFactor), 
-            peakSidelobeLevel(peakSidelobeLevel) { }
+            peakSidelobeLevel(peakSidelobeLevel),
+            energy(energy) { }
 
         inline const std::vector<int>& getS() const { return this->S; }
         inline void setS(const std::vector<int>& S) { this->S = S; }
@@ -36,6 +47,9 @@ class Sequence {
 
         inline unsigned int getPeakSidelobeLevel() const { return this->peakSidelobeLevel; }
         inline void setPeakSidelobeLevel(unsigned int peakSidelobeLevel) { this->peakSidelobeLevel = peakSidelobeLevel; }
+
+        inline unsigned int getEnergy() const { return this->energy; }
+        inline void setEnergy(unsigned int energy) { this->energy = energy; }
 
         const std::string toString() const;
         
