@@ -35,6 +35,7 @@ class Solver {
         );
 
         unsigned int calculateSpeed() const;
+        const unsigned int getEnergyFromFile(const std::string& path) const;
 
         std::vector<int> getFlippedVector(const std::vector<int>& S, unsigned int index) const;
         NeighbourResult evaluateNeighboursSDLS(unsigned int start, unsigned int end);
