@@ -1,6 +1,7 @@
-#include "sequence_generator.hpp"
+#include "random_generator.hpp"
+#include <random>
 
-std::vector<int> SequenceGenerator::generateSequence(unsigned int L) {
+std::vector<int> RandomGenerator::generateSequence(unsigned int L) {
     std::vector<int> sequence(L);
 
     for(unsigned int i = 0; i < L; i++) {
@@ -16,4 +17,8 @@ std::vector<int> SequenceGenerator::generateSequence(unsigned int L) {
     }
 
     return sequence;
+}
+
+const unsigned int RandomGenerator::generateRandomInt(unsigned int min, unsigned int max) {
+    return std::uniform_int_distribution<unsigned int>{min, max}(this->randomNumberGenerator);
 }
