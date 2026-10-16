@@ -1,10 +1,11 @@
-#include "sequence_generator.hpp"
+#include "random_generator.hpp"
 #include "sequence.hpp"
 #include "calculator.hpp"
 
 struct NeighbourResult {
     unsigned int index;
     unsigned int energy;
+    bool foundMove;
 };
 
 class Solver {
@@ -14,6 +15,7 @@ class Solver {
         const unsigned int nfesLmt;
         const unsigned int threads;
         unsigned int nfes;
+        // in milliseconds
         unsigned int runtime;
         unsigned int cpuTime;
         unsigned int energyConsumption;
@@ -22,7 +24,7 @@ class Solver {
         std::vector<std::vector<int>> T;
         Sequence currentSequence;
         Sequence bestSequence;
-        SequenceGenerator generator;
+        RandomGenerator generator;
 
         Sequence generateNewSequence();
         unsigned int valueFlip(
@@ -31,23 +33,34 @@ class Solver {
             const std::vector<std::vector<int>>& T,
             unsigned int index
         );
-        std::vector<int> flipIndex(const std::vector<int>& S, unsigned int index) const;
+
+        unsigned int calculateSpeed() const;
+
+        std::vector<int> getFlippedVector(const std::vector<int>& S, unsigned int index) const;
         NeighbourResult evaluateNeighboursNaive();
         NeighbourResult evaluateNeighbours();
+        NeighbourResult evaluateNeighboursTabu(
+            unsigned int start,
+            unsigned int end,
+            unsigned int k,
+            const Sequence& runBestSequence,
+            const std::vector<int>& M
+        );
         bool updateBestNeighbourNaive(unsigned int index, unsigned int energy);
         bool updateBestNeighbour(unsigned int index, unsigned int energy);
+
         
     public:
         Solver(
-            const unsigned int L = 100,
+            const unsigned int L = 600,
             const unsigned int seed = time(nullptr),
-            const unsigned int nfesLmt = 1000,
+            const unsigned int nfesLmt = 1000000,
             const unsigned int threads = 1
         ) : L(L), seed(seed), nfesLmt(nfesLmt), threads(threads),
         nfes(0), runtime(0), cpuTime(0), energyConsumption(0),
         speed(0), currentSequence(), generator(seed) { }
         
-        inline unsigned int getRunTime() const { return this->runtime; }
+        inline const unsigned int getRunTime() const { return this->runtime; }
         inline const Sequence& getCurrentSequence() const { return this->currentSequence; }
         inline const Sequence& getBestSequence() const { return this->bestSequence; }
         
@@ -57,5 +70,8 @@ class Solver {
 
         void steepestDescentLocalSearchNaive();
         void steepestDescentLocalSearch();
+        
         void tabuSearch();
+
+        void solve();
 };
