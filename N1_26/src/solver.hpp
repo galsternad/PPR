@@ -37,8 +37,7 @@ class Solver {
         unsigned int calculateSpeed() const;
 
         std::vector<int> getFlippedVector(const std::vector<int>& S, unsigned int index) const;
-        NeighbourResult evaluateNeighboursNaive();
-        NeighbourResult evaluateNeighbours();
+        NeighbourResult evaluateNeighboursSDLS(unsigned int start, unsigned int end);
         NeighbourResult evaluateNeighboursTabu(
             unsigned int start,
             unsigned int end,
@@ -46,9 +45,20 @@ class Solver {
             const Sequence& runBestSequence,
             const std::vector<int>& M
         );
-        bool updateBestNeighbourNaive(unsigned int index, unsigned int energy);
+
         bool updateBestNeighbour(unsigned int index, unsigned int energy);
 
+        void createThreadsSDLS(
+            std::vector<std::thread>& threads,
+            std::vector<NeighbourResult>& results
+        );
+        void createThreadsTabu(
+            std::vector<std::thread>& threads,
+            std::vector<NeighbourResult>& results,
+            unsigned int k,
+            const Sequence& runBestSequence,
+            const std::vector<int>& M
+        );
         
     public:
         Solver(
@@ -67,11 +77,7 @@ class Solver {
         const std::string toString() const;
 
         void randomSearch();
-
-        void steepestDescentLocalSearchNaive();
-        void steepestDescentLocalSearch();
-        
+        void steepestDescentLocalSearch();        
         void tabuSearch();
-
         void solve();
 };
