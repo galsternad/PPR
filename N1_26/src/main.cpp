@@ -14,8 +14,9 @@ const std::vector<std::vector<int>> testArrays = {
 };
 
 int main() {
-    Solver* solver = new Solver(60, time(nullptr), 10000, 16);
+    Solver* solver = new Solver(600, time(nullptr), 1000000, 16);
 
+    /*
     std::cout << "OPTIMIZED SDLS:\n";
     solver->steepestDescentLocalSearch();
 
@@ -24,7 +25,6 @@ int main() {
     std::cout << std::endl;
     std::cout << std::endl;
     
-    /*
     std::cout << "NAIVE:\n";
     solver->steepestDescentLocalSearchNaive();
 
@@ -34,7 +34,7 @@ int main() {
     */
 
     std::cout << "TABU SEARCH:\n";
-    solver->tabuSearch();
+    solver->solve();
 
     std::cout << solver->toString() << std::endl;
     std::cout << solver->getBestSequence().toString() << std::endl;

@@ -6,6 +6,17 @@ add_executable(main)
 
 set_property(TARGET main PROPERTY CXX_STANDARD 11)
 
+target_compile_options(main PRIVATE
+    -g
+    -O0
+    -fsanitize=undefined
+    -fno-omit-frame-pointer
+)
+
+target_link_options(main PRIVATE
+    -fsanitize=undefined
+)
+
 target_sources(main
     PRIVATE
         "src/main.cpp"
