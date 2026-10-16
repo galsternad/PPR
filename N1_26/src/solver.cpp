@@ -50,88 +50,25 @@ void Solver::randomSearch() {
     }
 }
 
-NeighbourResult Solver::evaluateNeighboursNaive() {
-    const auto& currentSequence = this->getCurrentSequence();
-    unsigned int bestIndex = 0;
-    auto bestEnergy = std::numeric_limits<unsigned int>::max();
-    
-    for(unsigned int i = 0; i < currentSequence.getS().size(); i++) {
-        auto neighbourS = currentSequence.getS();
-        
-        neighbourS[i] *= -1;
-        auto neighbourC = Calculator::calculateC(neighbourS);
-        auto neighbourEnergy = Calculator::calculateEnergy(neighbourC);
-        
-        if(neighbourEnergy < bestEnergy) {
-            bestEnergy = neighbourEnergy;
-            bestIndex = i;
-        }
-        
-        this->nfes++;
-    }
-    
-    return NeighbourResult { bestIndex, bestEnergy };
-}
+void Solver::createThreadsSDLS(
+    std::vector<std::thread>& threads,
+    std::vector<NeighbourResult>& results
+) {
+    for(unsigned int t = 0; t < this->threads; t++) {
+        const unsigned int chunkSize = this->L / this->threads;
+        unsigned int start = t * chunkSize;
+        unsigned int end = (t == this->threads - 1) 
+            ? this->L
+            : start + chunkSize;
 
-bool Solver::updateBestNeighbourNaive(unsigned int index, unsigned int energy) {
-    auto currentEnergy = this->currentSequence.getEnergy();
-    
-    auto newS = this->currentSequence.getS();
-    // flip bit
-    newS[index] *= -1;
-    auto newC = Calculator::calculateC(newS);
-    auto newEnergy = energy;
-    
-    if(newEnergy >= currentEnergy) {
-        return false;
-    }
-    
-    auto newMeritFactor = Calculator::calculateMeritFactor(newS, newC, newEnergy);
-    auto newPeakSidelobeLevel = Calculator::calculatePeakSidelobeLevel(newC);
-    this->currentSequence = Sequence(newS, newC, newMeritFactor, newPeakSidelobeLevel, newEnergy);
-    
-    std::cout << "MF: " << newMeritFactor << ", PSL: " << newPeakSidelobeLevel << std::endl;
-    
-    
-    return true;
-}
-
-void Solver::steepestDescentLocalSearchNaive() {
-    std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
-    
-    this->currentSequence = this->generateNewSequence();
-    this->bestSequence = currentSequence;
-    
-    while(this->nfes < this->nfesLmt) {
-        bool canImprove = true;
-        
-        while(canImprove) {
-            bool canEvaluateNeighbourhood = this->nfes + this->L <= this->nfesLmt;
-            
-            if(!canEvaluateNeighbourhood) {
-                break;
-            }
-
-            auto result = evaluateNeighboursNaive();
-            canImprove = updateBestNeighbourNaive(result.index, result.energy);
-        }
-        
-        if(this->currentSequence.getEnergy() < this->bestSequence.getEnergy()) {
-            bestSequence = currentSequence;
-        }
-        
-        bool canRestart = this->nfes + this->L + 1 <= this->nfesLmt;
-
-        if(!canRestart) {
-            break;
-        }
-
-        this->currentSequence = this->generateNewSequence();
+        threads.emplace_back([&, t, start, end]() {
+            results[t] = evaluateNeighboursSDLS(start, end);
+        });
     }
 
-    std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
-
-    this->runtime = std::chrono::system_clock::to_time_t(end) - std::chrono::system_clock::to_time_t(start);
+    for(auto& t : threads) {
+        t.join();
+    }
 }
 
 unsigned int Solver::valueFlip(
@@ -166,11 +103,11 @@ std::vector<int> Solver::getFlippedVector(const std::vector<int>& S, unsigned in
     return vec;
 }
 
-NeighbourResult Solver::evaluateNeighbours() {
+NeighbourResult Solver::evaluateNeighboursSDLS(unsigned int start, unsigned int end) {
     unsigned int bestIndex = 0;
     auto bestEnergy = std::numeric_limits<unsigned int>::max();
     
-    for(unsigned int i = 0; i < currentSequence.getS().size(); i++) {
+    for(unsigned int i = start; i < end; i++) {
         auto neighbourEnergy = this->valueFlip(
             this->currentSequence.getS(), 
             this->currentSequence.getC(), 
@@ -182,8 +119,6 @@ NeighbourResult Solver::evaluateNeighbours() {
             bestEnergy = neighbourEnergy;
             bestIndex = i;
         }
-        
-        this->nfes++;
     }
     
     return NeighbourResult { bestIndex, bestEnergy };
@@ -230,8 +165,22 @@ void Solver::steepestDescentLocalSearch() {
                 break;
             }
 
-            auto neighbour = evaluateNeighbours();
-            canImprove = updateBestNeighbour(neighbour.index, neighbour.energy);
+            auto bestIndex = 0U;
+            auto bestEnergy = std::numeric_limits<unsigned int>::max();
+            std::vector<std::thread> threads;
+            std::vector<NeighbourResult> results(this->threads);
+            this->createThreadsSDLS(threads, results);
+
+            this->nfes += this->L;
+
+            for(const auto& result : results) {
+                if(result.energy < bestEnergy) {
+                    bestEnergy = result.energy;
+                    bestIndex = result.index;
+                }
+            }
+
+            canImprove = this->updateBestNeighbour(bestIndex, bestEnergy);
         }
         
         if(this->currentSequence.getEnergy() < this->bestSequence.getEnergy()) {
@@ -251,6 +200,36 @@ void Solver::steepestDescentLocalSearch() {
     std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
 
     this->runtime = std::chrono::system_clock::to_time_t(end) - std::chrono::system_clock::to_time_t(start);
+}
+
+void Solver::createThreadsTabu(
+    std::vector<std::thread>& threads,
+    std::vector<NeighbourResult>& results,
+    unsigned int k,
+    const Sequence& runBestSequence,
+    const std::vector<int>& M
+) {
+    for(unsigned int t = 0; t < this->threads; t++) {
+        const unsigned int chunkSize = this->L / this->threads;
+        unsigned int start = t * chunkSize;
+        unsigned int end = (t == this->threads - 1)
+            ? this->L
+            : start + chunkSize;
+
+        threads.emplace_back([&, t, start, end, k]() {
+            results[t] = evaluateNeighboursTabu(
+                start,
+                end,
+                k,
+                runBestSequence,
+                M  
+            );
+        });
+    }
+
+    for(auto& t : threads) {
+        t.join();
+    }
 }
 
 NeighbourResult Solver::evaluateNeighboursTabu(
@@ -316,28 +295,13 @@ void Solver::tabuSearch() {
             // threading
             std::vector<std::thread> threads;
             std::vector<NeighbourResult> results(this->threads);
-            
-            for(unsigned int t = 0; t < this->threads; t++) {
-                const unsigned int chunkSize = this->L / this->threads;
-                unsigned int start = t * chunkSize;
-                unsigned int end = (t == this->threads - 1)
-                    ? this->L
-                    : start + chunkSize;
-
-                threads.emplace_back([&, t, start, end, k]() {
-                    results[t] = evaluateNeighboursTabu(
-                        start,
-                        end,
-                        k,
-                        runBestSequence,
-                        M  
-                    );
-                });
-            }
-
-            for(auto& t : threads) {
-                t.join();
-            }
+            this->createThreadsTabu(
+                threads,
+                results,
+                k,
+                runBestSequence,
+                M
+            );
 
             this->nfes += this->L;
 
