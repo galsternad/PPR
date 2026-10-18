@@ -1,6 +1,7 @@
 #include "random_generator.hpp"
 #include "sequence.hpp"
 #include "calculator.hpp"
+#include "metrics.hpp"
 
 struct NeighbourResult {
     unsigned int index;
@@ -10,16 +11,12 @@ struct NeighbourResult {
 
 class Solver {
     private:
-        const unsigned int L;
-        const unsigned int seed;
-        const unsigned int nfesLmt;
-        const unsigned int threads;
+        unsigned int L;
+        unsigned int seed;
+        unsigned int nfesLmt;
+        unsigned int threads;
         unsigned int nfes;
-        // in milliseconds
-        unsigned int runtime;
-        unsigned int cpuTime;
-        unsigned int energyConsumption;
-        unsigned int speed;
+        Metrics metrics;
         // neighbour evaluation cache
         std::vector<std::vector<int>> T;
         Sequence currentSequence;
@@ -55,15 +52,18 @@ class Solver {
         
     public:
         Solver(
-            const unsigned int L = 600,
-            const unsigned int seed = time(nullptr),
+            const unsigned int L = 250,
+            const unsigned int seed = 0,
             const unsigned int nfesLmt = 1000000,
             const unsigned int threads = 1
         ) : L(L), seed(seed), nfesLmt(nfesLmt), threads(threads),
-        nfes(0), runtime(0), cpuTime(0), energyConsumption(0),
-        speed(0), currentSequence(), generator(seed) { }
+            nfes(0), metrics(), currentSequence(), bestSequence(), generator(seed) { }
         
-        inline const unsigned int getRunTime() const { return this->runtime; }
+        inline void setL(unsigned int L) { this->L = L; }
+        inline void setSeed(unsigned int seed) { this->seed = seed; }
+        inline void setNfesLmt(unsigned int nfesLmt) { this->nfesLmt = nfesLmt; }
+        inline void setThreads(unsigned int threads) { this->threads = threads; }
+
         inline const Sequence& getCurrentSequence() const { return this->currentSequence; }
         inline const Sequence& getBestSequence() const { return this->bestSequence; }
         
@@ -80,5 +80,5 @@ class Solver {
         void randomSearch();
         void steepestDescentLocalSearch();        
         void tabuSearch();
-        void solve();
+        void solve(unsigned int arg);
 };

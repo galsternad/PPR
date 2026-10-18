@@ -6,15 +6,20 @@
 const std::string Sequence::toString() const {
     std::stringstream ss;
 
-    ss << "MF: " << this->meritFactor << ", PSL: " << this->peakSidelobeLevel << "."; 
+    auto bin = Sequence::toBinaryString(this->S);
+    auto hex = Sequence::toHexadecimalString(bin);
+
+    ss << "sequence: " << hex << "\n";
+    ss << "MF: " << this->meritFactor << "\n"; 
+    ss << "PSL: " << this->peakSidelobeLevel << "\n";
 
     return ss.str();
 }
 
-std::string Sequence::toBinaryString() const {
+std::string Sequence::toBinaryString(const std::vector<int>& S) {
     std::string result = "";
 
-    for(auto i : this->S) {
+    for(auto i : S) {
         switch(i) {
             case -1:
                 result += "1";
@@ -30,7 +35,7 @@ std::string Sequence::toBinaryString() const {
 
 // TODO:
 // binary to hex
-std::string Sequence::toHexadecimalString(std::string binaryString) const {
+std::string Sequence::toHexadecimalString(const std::string& binaryString) {
     const std::string prefix = "0x";
     std::string hexString = "";
 

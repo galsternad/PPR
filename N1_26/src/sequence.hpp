@@ -8,8 +8,6 @@ class Sequence {
         double meritFactor;
         unsigned int peakSidelobeLevel;
         unsigned int energy;
-
-        std::string binary;
     
     public:
         Sequence() :
@@ -24,8 +22,7 @@ class Sequence {
             C(std::vector<int> { }),
             meritFactor(0),
             peakSidelobeLevel(0),
-            energy(0),
-            binary(this->toBinaryString()) { }
+            energy(0) { }
 
         Sequence(
             const std::vector<int>& S,
@@ -37,8 +34,7 @@ class Sequence {
             C(C),
             meritFactor(meritFactor), 
             peakSidelobeLevel(peakSidelobeLevel),
-            energy(energy),
-            binary(this->toBinaryString()) { }
+            energy(energy) { }
 
         inline const std::vector<int>& getS() const { return this->S; }
         inline void setS(const std::vector<int>& S) { this->S = S; }
@@ -55,11 +51,8 @@ class Sequence {
         inline unsigned int getEnergy() const { return this->energy; }
         inline void setEnergy(unsigned int energy) { this->energy = energy; }
 
-        inline std::string getBinary() const { return this->binary; }
-        inline void setBinary(const std::string& binary) { this->binary = binary; }
-
         const std::string toString() const;
         
-        std::string toBinaryString() const;
-        std::string toHexadecimalString(std::string binaryString) const;
+        static std::string toBinaryString(const std::vector<int>& S);
+        static std::string toHexadecimalString(const std::string& binaryString);
 };

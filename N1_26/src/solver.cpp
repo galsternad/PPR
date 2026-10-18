@@ -1,24 +1,11 @@
 #include "solver.hpp"
+#include <stdexcept>
 #include <string>
 #include <time.h>
 #include <sys/time.h>
-#include <chrono>
 #include <limits>
-#include <ratio>
 #include <sstream>
 #include <thread>
-#include <fstream>
-
-unsigned int Solver::calculateSpeed() const {
-    unsigned int time = this->runtime;
-
-    // runtime in ms => * 1000
-    if(this->runtime == 0) {
-        time = 1;
-    }
-
-    return (this->nfes / time) * 1000;
-}
 
 Sequence Solver::generateNewSequence() {
     auto S = generator.generateSequence(this->L);
@@ -34,17 +21,16 @@ Sequence Solver::generateNewSequence() {
 const std::string Solver::toString() const {
     std::stringstream ss;
 
-    ss << "sequence:                " << 
-        this->bestSequence.toHexadecimalString(this->bestSequence.getBinary()) << "\n";
-    ss << "sequence length:         " << this->L << "\n";
+    ss << "length:                  " << this->L << "\n";
     ss << "seed:                    " << this->seed << "\n";
     ss << "max evaluations:         " << this->nfesLmt << "\n";
     ss << "threads:                 " << this->threads << "\n"; 
     ss << "number of evaluations:   " << this->nfes << "\n";
-    ss << "runtime:                 " << this->runtime << "ms\n";
-    ss << "cpu time:                " << this->cpuTime << "ms\n";
-    ss << "energy consumption:      " << this->energyConsumption << "mJ\n";
-    ss << "speed:                   " << this->calculateSpeed() << " nfes/s\n";
+    ss << "runtime:                 " << this->metrics.getRuntime().duration << "ms\n";
+    ss << "cpu time:                " << this->metrics.getCpuTime().duration << "ms\n";
+    ss << "energy consumption:      " << this->metrics.getEnergyConsumption().consumed << "mJ\n";
+    ss << "speed:                   " << this->metrics.getSpeed() << " nfes/s\n";
+    ss << bestSequence.toString();
 
     return ss.str();
 }
@@ -61,6 +47,7 @@ void Solver::randomSearch() {
             auto newSequence = Sequence(S, C, newMeritFactor, newPeakSidelobeLevel, newEnergy);
             
             this->currentSequence = newSequence;
+            this->bestSequence = newSequence;
             std::cout << "MF: " << newMeritFactor << ", PSL: " << newPeakSidelobeLevel << std::endl;
         }
         
@@ -362,39 +349,27 @@ void Solver::tabuSearch() {
     }
 }
 
-const unsigned int Solver::getEnergyFromFile(const std::string& path) const {
-    std::string result = "";
-    std::string str = "";
-    std::ifstream file(path);
-
-    while(std::getline(file, str)) {
-        result += str;
-    }
-
-    return std::stoul(result);
-}
-
-void Solver::solve() {
+void Solver::solve(unsigned int arg) {
     struct timespec cpuStart, cpuEnd;
     unsigned int energyStart, energyEnd = 0;
 
-    energyStart = this->getEnergyFromFile("/sys/class/powercap/intel-rapl:0/energy_uj");
-    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &cpuStart);
-    auto runStart = std::chrono::steady_clock::now();
+    this->metrics.start();
     
-    this->tabuSearch();
-    
-    energyEnd = this->getEnergyFromFile("/sys/class/powercap/intel-rapl:0/energy_uj");
-    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &cpuEnd);
-    auto runEnd = std::chrono::steady_clock::now();
-    
-    // from uJ to mJ
-    this->energyConsumption = (unsigned int)((energyEnd - energyStart) / 1000);
+    switch(arg) {
+        case 0:
+            this->randomSearch();
+            break;
+        case 1:
+            this->steepestDescentLocalSearch();
+            break;
+        case 2:
+            this->tabuSearch();
+            break;
+        default:
+            throw std::logic_error("Invalid argument");
+    }
 
-    this->cpuTime = (unsigned int)
-        ((cpuEnd.tv_sec - cpuStart.tv_sec) * 1000.0 +
-        (cpuEnd.tv_nsec - cpuStart.tv_nsec) / 1000000.0);
+    this->metrics.end();
     
-    std::chrono::duration<double, std::nano> elapsed = runEnd - runStart;
-    this->runtime = (unsigned int)(elapsed.count() / 1000000);
+    this->metrics.calculate(this->nfes);
 }
