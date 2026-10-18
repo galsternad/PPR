@@ -1,6 +1,7 @@
 #include <limits>
 #include <vector>
 #include <string>
+#include <limits.h>
 
 class Sequence {
     private:
