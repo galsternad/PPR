@@ -34,6 +34,8 @@ Sequence Solver::generateNewSequence() {
 const std::string Solver::toString() const {
     std::stringstream ss;
 
+    ss << "sequence:                " << 
+        this->bestSequence.toHexadecimalString(this->bestSequence.getBinary()) << "\n";
     ss << "sequence length:         " << this->L << "\n";
     ss << "seed:                    " << this->seed << "\n";
     ss << "max evaluations:         " << this->nfesLmt << "\n";
