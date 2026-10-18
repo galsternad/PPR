@@ -2,44 +2,673 @@ algorithm:               Random search
 --------------------------------------
 length:                  250
 seed:                    0
-max evaluations:         10000
+max evaluations:         1000000
 threads:                 1
-number of evaluations:   10001
-runtime:                 4374 ms
-CPU time:                4372 ms
-energy consumption:      214329 mJ
-speed:                   2286 nfes/s
-sequence: 0x07740474F7278D141F2957B9B9EF563CEF9EDB7A39E57CA51088376D4F81EFC
-MF: 1.60446
-PSL: 24
+number of evaluations:   1000000
+runtime:                 427145 ms
+CPU time:                427040 ms
+energy consumption:      2712541 mJ
+speed:                   2341 nfes/s
+sequence: 0x27C2DCBC252F1CAC85F0A2F08CCFDAFC7F667F2CD4C805EFAF2BF30C51DB388
+MF: 1.8308
+PSL: 26
 
 algorithm:               Random search
 --------------------------------------
 length:                  250
-seed:                    0
-max evaluations:         10000
+seed:                    1
+max evaluations:         1000000
 threads:                 1
-number of evaluations:   10001
-runtime:                 4233 ms
-CPU time:                4231 ms
-energy consumption:      1267204767 mJ
-speed:                   2362 nfes/s
-sequence: 0x07740474F7278D141F2957B9B9EF563CEF9EDB7A39E57CA51088376D4F81EFC
-MF: 1.60446
-PSL: 24
+number of evaluations:   1000000
+runtime:                 430265 ms
+CPU time:                430130 ms
+energy consumption:      2873166 mJ
+speed:                   2324 nfes/s
+sequence: 0x1B5B9EB0CB98782D13F0D132F76A7F4EFA89115215BEB939412DC7171A4C437
+MF: 1.82141
+PSL: 31
+
+algorithm:               Random search
+--------------------------------------
+length:                  250
+seed:                    2
+max evaluations:         1000000
+threads:                 1
+number of evaluations:   1000000
+runtime:                 431496 ms
+CPU time:                431383 ms
+energy consumption:      2803120 mJ
+speed:                   2317 nfes/s
+sequence: 0x14FA0CE772A1BE2BDAB000F9E7A8B326B0FFB665D4D1E2BB7F56B6D38E003D4
+MF: 1.87474
+PSL: 25
 
 algorithm:               Random search
 --------------------------------------
 length:                  250
 seed:                    0
 max evaluations:         1000000
-threads:                 1
-number of evaluations:   1000001
-runtime:                 425447 ms
-CPU time:                425375 ms
-energy consumption:      766464 mJ
-speed:                   2350 nfes/s
+threads:                 2
+number of evaluations:   1000000
+runtime:                 217688 ms
+CPU time:                434063 ms
+energy consumption:      2999012 mJ
+speed:                   4593 nfes/s
 sequence: 0x27C2DCBC252F1CAC85F0A2F08CCFDAFC7F667F2CD4C805EFAF2BF30C51DB388
 MF: 1.8308
 PSL: 26
 
+algorithm:               Random search
+--------------------------------------
+length:                  250
+seed:                    1
+max evaluations:         1000000
+threads:                 2
+number of evaluations:   1000000
+runtime:                 217895 ms
+CPU time:                434925 ms
+energy consumption:      3101212 mJ
+speed:                   4589 nfes/s
+sequence: 0x14FA0CE772A1BE2BDAB000F9E7A8B326B0FFB665D4D1E2BB7F56B6D38E003D4
+MF: 1.87474
+PSL: 25
+
+algorithm:               Random search
+--------------------------------------
+length:                  250
+seed:                    2
+max evaluations:         1000000
+threads:                 2
+number of evaluations:   1000000
+runtime:                 217834 ms
+CPU time:                435402 ms
+energy consumption:      3210816 mJ
+speed:                   4590 nfes/s
+sequence: 0x14FA0CE772A1BE2BDAB000F9E7A8B326B0FFB665D4D1E2BB7F56B6D38E003D4
+MF: 1.87474
+PSL: 25
+
+algorithm:               Random search
+--------------------------------------
+length:                  250
+seed:                    0
+max evaluations:         1000000
+threads:                 4
+number of evaluations:   1000000
+runtime:                 110857 ms
+CPU time:                442614 ms
+energy consumption:      2582984 mJ
+speed:                   9020 nfes/s
+sequence: 0x27C2DCBC252F1CAC85F0A2F08CCFDAFC7F667F2CD4C805EFAF2BF30C51DB388
+MF: 1.8308
+PSL: 26
+
+algorithm:               Random search
+--------------------------------------
+length:                  250
+seed:                    1
+max evaluations:         1000000
+threads:                 4
+number of evaluations:   1000000
+runtime:                 112960 ms
+CPU time:                448602 ms
+energy consumption:      2337182 mJ
+speed:                   8852 nfes/s
+sequence: 0x0B6A93F68E1A21FACFB9759DA3C22019771225CC8E968A46DE13D4FCB4EE778
+MF: 1.87564
+PSL: 37
+
+algorithm:               Random search
+--------------------------------------
+length:                  250
+seed:                    2
+max evaluations:         1000000
+threads:                 4
+number of evaluations:   1000000
+runtime:                 110911 ms
+CPU time:                441919 ms
+energy consumption:      2708911 mJ
+speed:                   9016 nfes/s
+sequence: 0x0B6A93F68E1A21FACFB9759DA3C22019771225CC8E968A46DE13D4FCB4EE778
+MF: 1.87564
+PSL: 37
+
+algorithm:               Random search
+--------------------------------------
+length:                  250
+seed:                    0
+max evaluations:         1000000
+threads:                 8
+number of evaluations:   1000000
+runtime:                 64775 ms
+CPU time:                476684 ms
+energy consumption:      1165672 mJ
+speed:                   15438 nfes/s
+sequence: 0x27C2DCBC252F1CAC85F0A2F08CCFDAFC7F667F2CD4C805EFAF2BF30C51DB388
+MF: 1.8308
+PSL: 26
+
+algorithm:               Random search
+--------------------------------------
+length:                  250
+seed:                    1
+max evaluations:         1000000
+threads:                 8
+number of evaluations:   1000000
+runtime:                 65499 ms
+CPU time:                497350 ms
+energy consumption:      1260459 mJ
+speed:                   15267 nfes/s
+sequence: 0x3CCCD19092E0A3323029BF7AA093E5CD3C1C47A6C28578816C47ADD6D28D529
+MF: 1.79711
+PSL: 26
+
+algorithm:               Random search
+--------------------------------------
+length:                  250
+seed:                    2
+max evaluations:         1000000
+threads:                 8
+number of evaluations:   1000000
+runtime:                 80285 ms
+CPU time:                524031 ms
+energy consumption:      2040942 mJ
+speed:                   12455 nfes/s
+sequence: 0x3CCCD19092E0A3323029BF7AA093E5CD3C1C47A6C28578816C47ADD6D28D529
+MF: 1.79711
+PSL: 26
+
+algorithm:               Random search
+--------------------------------------
+length:                  250
+seed:                    0
+max evaluations:         1000000
+threads:                 16
+number of evaluations:   1000000
+runtime:                 52798 ms
+CPU time:                829344 ms
+energy consumption:      337914 mJ
+speed:                   18940 nfes/s
+sequence: 0x1B872C312BE0C499CC819675051621A73E0D5D049544CAAD14CFF1AE8D4AF96
+MF: 1.78317
+PSL: 26
+
+algorithm:               Random search
+--------------------------------------
+length:                  250
+seed:                    1
+max evaluations:         1000000
+threads:                 16
+number of evaluations:   1000000
+runtime:                 53025 ms
+CPU time:                827745 ms
+energy consumption:      360072 mJ
+speed:                   18859 nfes/s
+sequence: 0x1B872C312BE0C499CC819675051621A73E0D5D049544CAAD14CFF1AE8D4AF96
+MF: 1.78317
+PSL: 26
+
+algorithm:               Random search
+--------------------------------------
+length:                  250
+seed:                    2
+max evaluations:         1000000
+threads:                 16
+number of evaluations:   1000000
+runtime:                 54524 ms
+CPU time:                849469 ms
+energy consumption:      481626 mJ
+speed:                   18340 nfes/s
+sequence: 0x1B872C312BE0C499CC819675051621A73E0D5D049544CAAD14CFF1AE8D4AF96
+MF: 1.78317
+PSL: 26
+
+algorithm:               SDLS
+--------------------------------------
+length:                  250
+seed:                    0
+max evaluations:         1000000
+threads:                 1
+number of evaluations:   999867
+runtime:                 17884 ms
+CPU time:                17924 ms
+energy consumption:      786219 mJ
+speed:                   55908 nfes/s
+sequence: 0x07F6F453AB3129555BEE4B5BBBAA49E7A079D0E619960B033C7A1621268F7E1
+MF: 4.33246
+PSL: 17
+
+algorithm:               SDLS
+--------------------------------------
+length:                  250
+seed:                    1
+max evaluations:         1000000
+threads:                 1
+number of evaluations:   999866
+runtime:                 17352 ms
+CPU time:                17391 ms
+energy consumption:      763547 mJ
+speed:                   57622 nfes/s
+sequence: 0x30B2A1CB95A68851ADD9A01A75D45D2CD790BFBDC37D123195C4F37C4E6A4B0
+MF: 4.37614
+PSL: 17
+
+algorithm:               SDLS
+--------------------------------------
+length:                  250
+seed:                    2
+max evaluations:         1000000
+threads:                 1
+number of evaluations:   999867
+runtime:                 17605 ms
+CPU time:                17646 ms
+energy consumption:      793864 mJ
+speed:                   56794 nfes/s
+sequence: 0x1EE4043B58F3CD8652447E0593775B13D3E234F05C2AA8B564F0957EF3DB6AF
+MF: 4.35662
+PSL: 15
+
+algorithm:               SDLS
+--------------------------------------
+length:                  250
+seed:                    0
+max evaluations:         1000000
+threads:                 2
+number of evaluations:   999867
+runtime:                 9796 ms
+CPU time:                13842 ms
+energy consumption:      780293 mJ
+speed:                   102068 nfes/s
+sequence: 0x07F6F453AB3129555BEE4B5BBBAA49E7A079D0E619960B033C7A1621268F7E1
+MF: 4.33246
+PSL: 17
+
+algorithm:               SDLS
+--------------------------------------
+length:                  250
+seed:                    1
+max evaluations:         1000000
+threads:                 2
+number of evaluations:   999866
+runtime:                 9500 ms
+CPU time:                13550 ms
+energy consumption:      491751 mJ
+speed:                   105249 nfes/s
+sequence: 0x30B2A1CB95A68851ADD9A01A75D45D2CD790BFBDC37D123195C4F37C4E6A4B0
+MF: 4.37614
+PSL: 17
+
+algorithm:               SDLS
+--------------------------------------
+length:                  250
+seed:                    2
+max evaluations:         1000000
+threads:                 2
+number of evaluations:   999867
+runtime:                 9507 ms
+CPU time:                13549 ms
+energy consumption:      485550 mJ
+speed:                   105171 nfes/s
+sequence: 0x1EE4043B58F3CD8652447E0593775B13D3E234F05C2AA8B564F0957EF3DB6AF
+MF: 4.35662
+PSL: 15
+
+algorithm:               SDLS
+--------------------------------------
+length:                  250
+seed:                    0
+max evaluations:         1000000
+threads:                 4
+number of evaluations:   999867
+runtime:                 7491 ms
+CPU time:                13770 ms
+energy consumption:      394542 mJ
+speed:                   133475 nfes/s
+sequence: 0x07F6F453AB3129555BEE4B5BBBAA49E7A079D0E619960B033C7A1621268F7E1
+MF: 4.33246
+PSL: 17
+
+algorithm:               SDLS
+--------------------------------------
+length:                  250
+seed:                    1
+max evaluations:         1000000
+threads:                 4
+number of evaluations:   999866
+runtime:                 7585 ms
+CPU time:                13894 ms
+energy consumption:      409845 mJ
+speed:                   131821 nfes/s
+sequence: 0x30B2A1CB95A68851ADD9A01A75D45D2CD790BFBDC37D123195C4F37C4E6A4B0
+MF: 4.37614
+PSL: 17
+
+algorithm:               SDLS
+--------------------------------------
+length:                  250
+seed:                    2
+max evaluations:         1000000
+threads:                 4
+number of evaluations:   999867
+runtime:                 7528 ms
+CPU time:                13790 ms
+energy consumption:      411912 mJ
+speed:                   132819 nfes/s
+sequence: 0x1EE4043B58F3CD8652447E0593775B13D3E234F05C2AA8B564F0957EF3DB6AF
+MF: 4.35662
+PSL: 15
+
+algorithm:               SDLS
+--------------------------------------
+length:                  250
+seed:                    0
+max evaluations:         1000000
+threads:                 8
+number of evaluations:   999867
+runtime:                 6991 ms
+CPU time:                15066 ms
+energy consumption:      387914 mJ
+speed:                   143022 nfes/s
+sequence: 0x07F6F453AB3129555BEE4B5BBBAA49E7A079D0E619960B033C7A1621268F7E1
+MF: 4.33246
+PSL: 17
+
+algorithm:               SDLS
+--------------------------------------
+length:                  250
+seed:                    1
+max evaluations:         1000000
+threads:                 8
+number of evaluations:   999866
+runtime:                 6944 ms
+CPU time:                14977 ms
+energy consumption:      389094 mJ
+speed:                   143989 nfes/s
+sequence: 0x30B2A1CB95A68851ADD9A01A75D45D2CD790BFBDC37D123195C4F37C4E6A4B0
+MF: 4.37614
+PSL: 17
+
+algorithm:               SDLS
+--------------------------------------
+length:                  250
+seed:                    2
+max evaluations:         1000000
+threads:                 8
+number of evaluations:   999867
+runtime:                 7036 ms
+CPU time:                15258 ms
+energy consumption:      402897 mJ
+speed:                   142107 nfes/s
+sequence: 0x1EE4043B58F3CD8652447E0593775B13D3E234F05C2AA8B564F0957EF3DB6AF
+MF: 4.35662
+PSL: 15
+
+algorithm:               SDLS
+--------------------------------------
+length:                  250
+seed:                    0
+max evaluations:         1000000
+threads:                 16
+number of evaluations:   999867
+runtime:                 7609 ms
+CPU time:                17321 ms
+energy consumption:      429749 mJ
+speed:                   131405 nfes/s
+sequence: 0x07F6F453AB3129555BEE4B5BBBAA49E7A079D0E619960B033C7A1621268F7E1
+MF: 4.33246
+PSL: 17
+
+algorithm:               SDLS
+--------------------------------------
+length:                  250
+seed:                    1
+max evaluations:         1000000
+threads:                 16
+number of evaluations:   999866
+runtime:                 7496 ms
+CPU time:                17102 ms
+energy consumption:      422297 mJ
+speed:                   133386 nfes/s
+sequence: 0x30B2A1CB95A68851ADD9A01A75D45D2CD790BFBDC37D123195C4F37C4E6A4B0
+MF: 4.37614
+PSL: 17
+
+algorithm:               SDLS
+--------------------------------------
+length:                  250
+seed:                    2
+max evaluations:         1000000
+threads:                 16
+number of evaluations:   999867
+runtime:                 7485 ms
+CPU time:                17092 ms
+energy consumption:      431210 mJ
+speed:                   133582 nfes/s
+sequence: 0x1EE4043B58F3CD8652447E0593775B13D3E234F05C2AA8B564F0957EF3DB6AF
+MF: 4.35662
+PSL: 15
+
+algorithm:               Tabu search
+--------------------------------------
+length:                  250
+seed:                    0
+max evaluations:         1000000
+threads:                 1
+number of evaluations:   999766
+runtime:                 16780 ms
+CPU time:                16812 ms
+energy consumption:      778351 mJ
+speed:                   59580 nfes/s
+sequence: 0x2BC1A77CC512EF9AA746C6C3EAB47925B4E7F50DA2391F89BFF6B7AC0A62E22
+MF: 4.84271
+PSL: 16
+
+algorithm:               Tabu search
+--------------------------------------
+length:                  250
+seed:                    1
+max evaluations:         1000000
+threads:                 1
+number of evaluations:   999768
+runtime:                 17684 ms
+CPU time:                17715 ms
+energy consumption:      805297 mJ
+speed:                   56535 nfes/s
+sequence: 0x152EB3D2D95A5C9DE70B2854C659C090027427C3F547074CC009E6C9E8827DC
+MF: 5.16273
+PSL: 19
+
+algorithm:               Tabu search
+--------------------------------------
+length:                  250
+seed:                    2
+max evaluations:         1000000
+threads:                 1
+number of evaluations:   999767
+runtime:                 17039 ms
+CPU time:                17076 ms
+energy consumption:      803192 mJ
+speed:                   58675 nfes/s
+sequence: 0x2EAF145AD4B1B072EEF49FC43DC201CB7F936CF387EDF5F44E83D8C8CE6C22A
+MF: 4.9035
+PSL: 16
+
+algorithm:               Tabu search
+--------------------------------------
+length:                  250
+seed:                    0
+max evaluations:         1000000
+threads:                 2
+number of evaluations:   999766
+runtime:                 9414 ms
+CPU time:                13458 ms
+energy consumption:      478653 mJ
+speed:                   106199 nfes/s
+sequence: 0x2BC1A77CC512EF9AA746C6C3EAB47925B4E7F50DA2391F89BFF6B7AC0A62E22
+MF: 4.84271
+PSL: 16
+
+algorithm:               Tabu search
+--------------------------------------
+length:                  250
+seed:                    1
+max evaluations:         1000000
+threads:                 2
+number of evaluations:   999768
+runtime:                 9499 ms
+CPU time:                13555 ms
+energy consumption:      473428 mJ
+speed:                   105249 nfes/s
+sequence: 0x152EB3D2D95A5C9DE70B2854C659C090027427C3F547074CC009E6C9E8827DC
+MF: 5.16273
+PSL: 19
+
+algorithm:               Tabu search
+--------------------------------------
+length:                  250
+seed:                    2
+max evaluations:         1000000
+threads:                 2
+number of evaluations:   999767
+runtime:                 9436 ms
+CPU time:                13488 ms
+energy consumption:      482965 mJ
+speed:                   105952 nfes/s
+sequence: 0x2EAF145AD4B1B072EEF49FC43DC201CB7F936CF387EDF5F44E83D8C8CE6C22A
+MF: 4.9035
+PSL: 16
+
+algorithm:               Tabu search
+--------------------------------------
+length:                  250
+seed:                    0
+max evaluations:         1000000
+threads:                 4
+number of evaluations:   999766
+runtime:                 7433 ms
+CPU time:                13708 ms
+energy consumption:      410179 mJ
+speed:                   134503 nfes/s
+sequence: 0x2BC1A77CC512EF9AA746C6C3EAB47925B4E7F50DA2391F89BFF6B7AC0A62E22
+MF: 4.84271
+PSL: 16
+
+algorithm:               Tabu search
+--------------------------------------
+length:                  250
+seed:                    1
+max evaluations:         1000000
+threads:                 4
+number of evaluations:   999768
+runtime:                 7410 ms
+CPU time:                13662 ms
+energy consumption:      397028 mJ
+speed:                   134921 nfes/s
+sequence: 0x152EB3D2D95A5C9DE70B2854C659C090027427C3F547074CC009E6C9E8827DC
+MF: 5.16273
+PSL: 19
+
+algorithm:               Tabu search
+--------------------------------------
+length:                  250
+seed:                    2
+max evaluations:         1000000
+threads:                 4
+number of evaluations:   999767
+runtime:                 7424 ms
+CPU time:                13688 ms
+energy consumption:      401221 mJ
+speed:                   134666 nfes/s
+sequence: 0x2EAF145AD4B1B072EEF49FC43DC201CB7F936CF387EDF5F44E83D8C8CE6C22A
+MF: 4.9035
+PSL: 16
+
+algorithm:               Tabu search
+--------------------------------------
+length:                  250
+seed:                    0
+max evaluations:         1000000
+threads:                 8
+number of evaluations:   999766
+runtime:                 6880 ms
+CPU time:                14838 ms
+energy consumption:      373960 mJ
+speed:                   145314 nfes/s
+sequence: 0x2BC1A77CC512EF9AA746C6C3EAB47925B4E7F50DA2391F89BFF6B7AC0A62E22
+MF: 4.84271
+PSL: 16
+
+algorithm:               Tabu search
+--------------------------------------
+length:                  250
+seed:                    1
+max evaluations:         1000000
+threads:                 8
+number of evaluations:   999768
+runtime:                 6881 ms
+CPU time:                14832 ms
+energy consumption:      376379 mJ
+speed:                   145293 nfes/s
+sequence: 0x152EB3D2D95A5C9DE70B2854C659C090027427C3F547074CC009E6C9E8827DC
+MF: 5.16273
+PSL: 19
+
+algorithm:               Tabu search
+--------------------------------------
+length:                  250
+seed:                    2
+max evaluations:         1000000
+threads:                 8
+number of evaluations:   999767
+runtime:                 6925 ms
+CPU time:                14921 ms
+energy consumption:      378529 mJ
+speed:                   144370 nfes/s
+sequence: 0x2EAF145AD4B1B072EEF49FC43DC201CB7F936CF387EDF5F44E83D8C8CE6C22A
+MF: 4.9035
+PSL: 16
+
+algorithm:               Tabu search
+--------------------------------------
+length:                  250
+seed:                    0
+max evaluations:         1000000
+threads:                 16
+number of evaluations:   999766
+runtime:                 7381 ms
+CPU time:                17005 ms
+energy consumption:      408478 mJ
+speed:                   135451 nfes/s
+sequence: 0x2BC1A77CC512EF9AA746C6C3EAB47925B4E7F50DA2391F89BFF6B7AC0A62E22
+MF: 4.84271
+PSL: 16
+
+algorithm:               Tabu search
+--------------------------------------
+length:                  250
+seed:                    1
+max evaluations:         1000000
+threads:                 16
+number of evaluations:   999768
+runtime:                 7369 ms
+CPU time:                16954 ms
+energy consumption:      405221 mJ
+speed:                   135672 nfes/s
+sequence: 0x152EB3D2D95A5C9DE70B2854C659C090027427C3F547074CC009E6C9E8827DC
+MF: 5.16273
+PSL: 19
+
+algorithm:               Tabu search
+--------------------------------------
+length:                  250
+seed:                    2
+max evaluations:         1000000
+threads:                 16
+number of evaluations:   999767
+runtime:                 7454 ms
+CPU time:                17159 ms
+energy consumption:      419604 mJ
+speed:                   134124 nfes/s
+sequence: 0x2EAF145AD4B1B072EEF49FC43DC201CB7F936CF387EDF5F44E83D8C8CE6C22A
+MF: 4.9035
+PSL: 16

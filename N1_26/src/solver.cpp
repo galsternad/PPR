@@ -70,22 +70,19 @@ void Solver::createThreadsRandom(
 
 void Solver::randomSearch() {
     this->bestSequence = Sequence();
-    this->nfes++;
 
-    while(this->nfes <= this->nfesLmt) {
-        auto workers = std::vector<std::thread>();
-        auto results = std::vector<Sequence>(this->threads);
-    
-        this->createThreadsRandom(workers, results);
-    
-        for(const auto& result : results) {
-            if(result.getEnergy() < this->bestSequence.getEnergy()) {
-                this->bestSequence = result;
-            }
+    auto workers = std::vector<std::thread>();
+    auto results = std::vector<Sequence>(this->threads);
+
+    this->createThreadsRandom(workers, results);
+
+    for(const auto& result : results) {
+        if(result.getEnergy() < this->bestSequence.getEnergy()) {
+            this->bestSequence = result;
         }
-    
-        this->nfes += this->nfesLmt;
     }
+
+    this->nfes += this->nfesLmt;
 }
 
 
@@ -358,7 +355,6 @@ void Solver::tabuSearch() {
             this->T = Calculator::calculateT(newS);
             M[bestIndex] = k + minTabu + generator.generateRandomInt(0, extraTabu - 1);
             
-            
             if(this->currentSequence.getEnergy() < runBestSequence.getEnergy()) {
                 runBestSequence = this->currentSequence;
             }
@@ -368,7 +364,6 @@ void Solver::tabuSearch() {
         if(runBestSequence.getEnergy() < this->bestSequence.getEnergy()) {
             this->bestSequence = runBestSequence;
         }
-
         
         bool canRestart = this->nfes + this->L + 1 <= this->nfesLmt;
         

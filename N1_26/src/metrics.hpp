@@ -15,8 +15,8 @@ struct CpuTime {
 };
 
 struct EnergyConsumption {
-    unsigned long start;
-    unsigned long end;
+    unsigned long long start;
+    unsigned long long end;
     unsigned int consumed;
 };
 
