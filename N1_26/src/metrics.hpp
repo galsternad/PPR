@@ -1,5 +1,6 @@
 #include <chrono>
 #include <string>
+#include <time.h>
 
 struct Runtime {
     std::chrono::time_point<std::chrono::steady_clock> start;
@@ -14,8 +15,8 @@ struct CpuTime {
 };
 
 struct EnergyConsumption {
-    unsigned int start;
-    unsigned int end;
+    unsigned long start;
+    unsigned long end;
     unsigned int consumed;
 };
 
@@ -31,9 +32,9 @@ class Metrics {
     
     public:
         Metrics(
-            Runtime runtime = { },
-            CpuTime cpuTime = { },
-            EnergyConsumption energyConsumption = { },
+            Runtime runtime,
+            CpuTime cpuTime,
+            EnergyConsumption energyConsumption,
             unsigned int speed = 0
         ) : runtime(), cpuTime(), 
             energyConsumption(), speed(speed) { }
@@ -42,8 +43,9 @@ class Metrics {
         inline const CpuTime getCpuTime() const { return this->cpuTime; }
         inline const EnergyConsumption getEnergyConsumption() const { return this->energyConsumption; }
         inline const unsigned int getSpeed() const { return this->speed; }
-
         unsigned int calculateSpeed(unsigned int nfes);
+
+        const std::string toString() const;
         
         void start();
         void end();

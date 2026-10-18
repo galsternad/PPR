@@ -21,37 +21,70 @@ Sequence Solver::generateNewSequence() {
 const std::string Solver::toString() const {
     std::stringstream ss;
 
-    ss << "length:                  " << this->L << "\n";
-    ss << "seed:                    " << this->seed << "\n";
-    ss << "max evaluations:         " << this->nfesLmt << "\n";
-    ss << "threads:                 " << this->threads << "\n"; 
-    ss << "number of evaluations:   " << this->nfes << "\n";
-    ss << "runtime:                 " << this->metrics.getRuntime().duration << "ms\n";
-    ss << "cpu time:                " << this->metrics.getCpuTime().duration << "ms\n";
-    ss << "energy consumption:      " << this->metrics.getEnergyConsumption().consumed << "mJ\n";
-    ss << "speed:                   " << this->metrics.getSpeed() << " nfes/s\n";
-    ss << bestSequence.toString();
+    ss << "length:                  " << this->L        << "\n";
+    ss << "seed:                    " << this->seed     << "\n";
+    ss << "max evaluations:         " << this->nfesLmt  << "\n";
+    ss << "threads:                 " << this->threads  << "\n"; 
+    ss << "number of evaluations:   " << this->nfes     << "\n";
+    ss << metrics.toString()                            << "\n";
+    ss << bestSequence.toString()                       << "\n";
 
     return ss.str();
 }
 
+void Solver::createThreadsRandom(
+    std::vector<std::thread>& workers,
+    std::vector<Sequence>& results
+) {
+    for(unsigned int t = 0; t < this->threads; t++) {
+        const unsigned int chunkSize = this->nfesLmt / this->threads;
+        unsigned int start = t * chunkSize;
+        unsigned int end = (t + 1) * chunkSize;
+        
+        workers.emplace_back([&, t, start, end]() {
+            auto localRandomGenerator = RandomGenerator(seed + t);
+            auto localBest = Sequence();
+
+            for(unsigned int i = start; i < end; i++) {
+                auto S = localRandomGenerator.generateSequence(this->L);
+                auto C = Calculator::calculateC(S);
+                auto energy = Calculator::calculateEnergy(C);
+                
+                if(energy < localBest.getEnergy()) {
+                    auto meritFactor = Calculator::calculateMeritFactor(S, C, energy);
+                    auto peakSidelobeLevel = Calculator::calculatePeakSidelobeLevel(C);
+                    
+                    localBest = Sequence(S, C, meritFactor, peakSidelobeLevel, energy);
+                }
+            }
+
+            results[t] = localBest;
+        });
+
+    }
+
+    for(auto& t : workers) {
+        t.join();
+    }
+}
+
 void Solver::randomSearch() {
-    for(unsigned int i = 0; i < this->nfesLmt; i++) {
-        auto S = generator.generateSequence(this->L);
-        auto C = Calculator::calculateC(S);
-        auto newMeritFactor = Calculator::calculateMeritFactor(S, C);
-        
-        if(newMeritFactor > currentSequence.getMeritFactor()) {
-            auto newPeakSidelobeLevel = Calculator::calculatePeakSidelobeLevel(C);
-            auto newEnergy = Calculator::calculateEnergy(C);
-            auto newSequence = Sequence(S, C, newMeritFactor, newPeakSidelobeLevel, newEnergy);
-            
-            this->currentSequence = newSequence;
-            this->bestSequence = newSequence;
-            std::cout << "MF: " << newMeritFactor << ", PSL: " << newPeakSidelobeLevel << std::endl;
+    this->bestSequence = Sequence();
+    this->nfes++;
+
+    while(this->nfes <= this->nfesLmt) {
+        auto workers = std::vector<std::thread>();
+        auto results = std::vector<Sequence>(this->threads);
+    
+        this->createThreadsRandom(workers, results);
+    
+        for(const auto& result : results) {
+            if(result.getEnergy() < this->bestSequence.getEnergy()) {
+                this->bestSequence = result;
+            }
         }
-        
-        this->nfes++;
+    
+        this->nfes += this->nfesLmt;
     }
 }
 
@@ -128,13 +161,11 @@ bool Solver::updateBestNeighbour(unsigned int index, unsigned int energy) {
     this->currentSequence = Sequence(newS, newC, newMeritFactor, newPeakSidelobeLevel, newEnergy);
     this->T = Calculator::calculateT(newS);
     
-    std::cout << "MF: " << newMeritFactor << ", PSL: " << newPeakSidelobeLevel << std::endl;
-    
     return true;
 }
 
 void Solver::createThreadsSDLS(
-    std::vector<std::thread>& threads,
+    std::vector<std::thread>& workers,
     std::vector<NeighbourResult>& results
 ) {
     for(unsigned int t = 0; t < this->threads; t++) {
@@ -144,12 +175,12 @@ void Solver::createThreadsSDLS(
             ? this->L
             : start + chunkSize;
 
-        threads.emplace_back([&, t, start, end]() {
+        workers.emplace_back([&, t, start, end]() {
             results[t] = evaluateNeighboursSDLS(start, end);
         });
     }
 
-    for(auto& t : threads) {
+    for(auto& t : workers) {
         t.join();
     }
 }
@@ -246,7 +277,7 @@ void Solver::createThreadsTabu(
         unsigned int end = (t == this->threads - 1)
         ? this->L
         : start + chunkSize;
-        
+
         workers.emplace_back([&, t, start, end, k]() {
             results[t] = evaluateNeighboursTabu(
                 start,
@@ -327,16 +358,17 @@ void Solver::tabuSearch() {
             this->T = Calculator::calculateT(newS);
             M[bestIndex] = k + minTabu + generator.generateRandomInt(0, extraTabu - 1);
             
-            std::cout << "MF: " << newMeritFactor << ", PSL: " << newPeakSidelobeLevel << std::endl;
             
             if(this->currentSequence.getEnergy() < runBestSequence.getEnergy()) {
                 runBestSequence = this->currentSequence;
             }
             
-            if(this->currentSequence.getEnergy() < this->bestSequence.getEnergy()) {
-                this->bestSequence = newSequence;
-            }
         }
+        
+        if(runBestSequence.getEnergy() < this->bestSequence.getEnergy()) {
+            this->bestSequence = runBestSequence;
+        }
+
         
         bool canRestart = this->nfes + this->L + 1 <= this->nfesLmt;
         
@@ -367,6 +399,7 @@ void Solver::solve(unsigned int arg) {
             break;
         default:
             throw std::logic_error("Invalid argument");
+            break;
     }
 
     this->metrics.end();

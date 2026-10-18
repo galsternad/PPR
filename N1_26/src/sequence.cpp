@@ -11,7 +11,7 @@ const std::string Sequence::toString() const {
 
     ss << "sequence: " << hex << "\n";
     ss << "MF: " << this->meritFactor << "\n"; 
-    ss << "PSL: " << this->peakSidelobeLevel << "\n";
+    ss << "PSL: " << this->peakSidelobeLevel;
 
     return ss.str();
 }

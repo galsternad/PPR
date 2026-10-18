@@ -1,0 +1,45 @@
+algorithm:               Random search
+--------------------------------------
+length:                  250
+seed:                    0
+max evaluations:         10000
+threads:                 1
+number of evaluations:   10001
+runtime:                 4374 ms
+CPU time:                4372 ms
+energy consumption:      214329 mJ
+speed:                   2286 nfes/s
+sequence: 0x07740474F7278D141F2957B9B9EF563CEF9EDB7A39E57CA51088376D4F81EFC
+MF: 1.60446
+PSL: 24
+
+algorithm:               Random search
+--------------------------------------
+length:                  250
+seed:                    0
+max evaluations:         10000
+threads:                 1
+number of evaluations:   10001
+runtime:                 4233 ms
+CPU time:                4231 ms
+energy consumption:      1267204767 mJ
+speed:                   2362 nfes/s
+sequence: 0x07740474F7278D141F2957B9B9EF563CEF9EDB7A39E57CA51088376D4F81EFC
+MF: 1.60446
+PSL: 24
+
+algorithm:               Random search
+--------------------------------------
+length:                  250
+seed:                    0
+max evaluations:         1000000
+threads:                 1
+number of evaluations:   1000001
+runtime:                 425447 ms
+CPU time:                425375 ms
+energy consumption:      766464 mJ
+speed:                   2350 nfes/s
+sequence: 0x27C2DCBC252F1CAC85F0A2F08CCFDAFC7F667F2CD4C805EFAF2BF30C51DB388
+MF: 1.8308
+PSL: 26
+

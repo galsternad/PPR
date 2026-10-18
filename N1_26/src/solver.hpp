@@ -2,6 +2,8 @@
 #include "sequence.hpp"
 #include "calculator.hpp"
 #include "metrics.hpp"
+#include <stdexcept>
+#include <thread>
 
 struct NeighbourResult {
     unsigned int index;
@@ -16,9 +18,9 @@ class Solver {
         unsigned int nfesLmt;
         unsigned int threads;
         unsigned int nfes;
-        Metrics metrics;
         // neighbour evaluation cache
         std::vector<std::vector<int>> T;
+        Metrics metrics;
         Sequence currentSequence;
         Sequence bestSequence;
         RandomGenerator generator;
@@ -38,12 +40,16 @@ class Solver {
 
         bool updateBestNeighbour(unsigned int index, unsigned int energy);
 
+        void createThreadsRandom(
+            std::vector<std::thread>& workers,
+            std::vector<Sequence>& results
+        );
         void createThreadsSDLS(
-            std::vector<std::thread>& threads,
+            std::vector<std::thread>& workers,
             std::vector<NeighbourResult>& results
         );
         void createThreadsTabu(
-            std::vector<std::thread>& threads,
+            std::vector<std::thread>& workers,
             std::vector<NeighbourResult>& results,
             unsigned int k,
             const Sequence& runBestSequence,
@@ -53,17 +59,18 @@ class Solver {
     public:
         Solver(
             const unsigned int L = 250,
-            const unsigned int seed = 0,
+            const unsigned int seed = time(nullptr),
             const unsigned int nfesLmt = 1000000,
             const unsigned int threads = 1
         ) : L(L), seed(seed), nfesLmt(nfesLmt), threads(threads),
-            nfes(0), metrics(), currentSequence(), bestSequence(), generator(seed) { }
+            nfes(0), metrics(Runtime(), CpuTime(), EnergyConsumption()), 
+            currentSequence(), bestSequence(), generator(seed) { 
+            if(threads < 1) {
+                throw std::logic_error("Number of threads can't be lesser than 1.");
+            }
+                
+        }
         
-        inline void setL(unsigned int L) { this->L = L; }
-        inline void setSeed(unsigned int seed) { this->seed = seed; }
-        inline void setNfesLmt(unsigned int nfesLmt) { this->nfesLmt = nfesLmt; }
-        inline void setThreads(unsigned int threads) { this->threads = threads; }
-
         inline const Sequence& getCurrentSequence() const { return this->currentSequence; }
         inline const Sequence& getBestSequence() const { return this->bestSequence; }
         

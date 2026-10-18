@@ -1,3 +1,4 @@
+#include <limits>
 #include <vector>
 #include <string>
 
@@ -15,14 +16,14 @@ class Sequence {
             C(std::vector<int> { }),
             meritFactor(0),
             peakSidelobeLevel(0),
-            energy(0) { }
+            energy(std::numeric_limits<unsigned int>::max()) { }
 
         Sequence(const std::vector<int>& S) :
             S(S),
             C(std::vector<int> { }),
             meritFactor(0),
             peakSidelobeLevel(0),
-            energy(0) { }
+            energy(std::numeric_limits<unsigned int>::max()) { }
 
         Sequence(
             const std::vector<int>& S,

@@ -1,5 +1,6 @@
 #include <string>
 #include <map>
+#include <time.h>
 
 class Parser {
     private:
@@ -10,11 +11,11 @@ class Parser {
         // 1 - SDLS
         // 2 - tabu
         std::map<std::string, unsigned int> argumentsMap = {
-            {"-L",       250},
-            {"-seed",    0},
-            {"-nfesLmt", 1000000},
-            {"-t",       1},
-            {"-a",       2}
+            { "-L",       250           },
+            { "-seed",    time(nullptr) },
+            { "-nfesLmt", 1000000       },
+            { "-t",       1             },
+            { "-a",       2             }
         };
 
     public:
