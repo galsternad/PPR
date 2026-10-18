@@ -19,6 +19,7 @@ unsigned int Solver::calculateSpeed() const {
 
     return (this->nfes / time) * 1000;
 }
+
 Sequence Solver::generateNewSequence() {
     auto S = generator.generateSequence(this->L);
     auto C = Calculator::calculateC(S);

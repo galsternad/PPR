@@ -1,5 +1,7 @@
 #include "sequence.hpp"
+#include <iostream>
 #include <sstream>
+#include <unordered_map>
 
 const std::string Sequence::toString() const {
     std::stringstream ss;
@@ -45,5 +47,18 @@ std::string Sequence::toBinaryString() const {
 // TODO:
 // binary to hex
 std::string Sequence::toHexadecimalString(std::string binaryString) const {
-    return "";
+    std::string hexString = "";
+    std::cout<<binaryString<<std::endl;
+    std::cout<<binaryString.length()<<std::endl;
+
+    const std::unordered_map<std::string, char> hexDictionary = {
+        {"0000", '0'}, {"0001", '1'}, {"0010", '2'}, {"0011", '3'},
+        {"0100", '4'}, {"0101", '5'}, {"0110", '6'}, {"0111", '7'},
+        {"1000", '8'}, {"1001", '9'}, {"1010", 'A'}, {"1011", 'B'},
+        {"1100", 'C'}, {"1101", 'D'}, {"1110", 'E'}, {"1111", 'F'}
+    };
+
+    for(unsigned int i = binaryString.length())
+
+    return hexString;
 }

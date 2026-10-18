@@ -25,18 +25,10 @@ class Solver {
         Sequence currentSequence;
         Sequence bestSequence;
         RandomGenerator generator;
-
-        Sequence generateNewSequence();
-        unsigned int valueFlip(
-            const std::vector<int>& S,
-            const std::vector<int>& C,
-            const std::vector<std::vector<int>>& T,
-            unsigned int index
-        );
-
+        
         unsigned int calculateSpeed() const;
         const unsigned int getEnergyFromFile(const std::string& path) const;
-
+        
         std::vector<int> getFlippedVector(const std::vector<int>& S, unsigned int index) const;
         NeighbourResult evaluateNeighboursSDLS(unsigned int start, unsigned int end);
         NeighbourResult evaluateNeighboursTabu(
@@ -76,6 +68,14 @@ class Solver {
         inline const Sequence& getBestSequence() const { return this->bestSequence; }
         
         const std::string toString() const;
+        
+        Sequence generateNewSequence();
+        unsigned int valueFlip(
+            const std::vector<int>& S,
+            const std::vector<int>& C,
+            const std::vector<std::vector<int>>& T,
+            unsigned int index
+        );
 
         void randomSearch();
         void steepestDescentLocalSearch();        
