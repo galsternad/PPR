@@ -1,3 +1,4 @@
+#include <cstdint>
 #include <limits>
 #include <vector>
 #include <string>
@@ -8,8 +9,8 @@ class Sequence {
         std::vector<int> S;
         std::vector<int> C;
         double meritFactor;
-        unsigned int peakSidelobeLevel;
-        unsigned int energy;
+        uint32_t peakSidelobeLevel;
+        uint32_t energy;
     
     public:
         Sequence() :
@@ -17,21 +18,21 @@ class Sequence {
             C(std::vector<int> { }),
             meritFactor(0),
             peakSidelobeLevel(0),
-            energy(std::numeric_limits<unsigned int>::max()) { }
+            energy(std::numeric_limits<uint32_t>::max()) { }
 
         Sequence(const std::vector<int>& S) :
             S(S),
             C(std::vector<int> { }),
             meritFactor(0),
             peakSidelobeLevel(0),
-            energy(std::numeric_limits<unsigned int>::max()) { }
+            energy(std::numeric_limits<uint32_t>::max()) { }
 
         Sequence(
             const std::vector<int>& S,
             const std::vector<int>& C,
             const double meritFactor,
-            const unsigned int peakSidelobeLevel,
-            const unsigned int energy
+            const uint32_t peakSidelobeLevel,
+            const uint32_t energy
         ) : S(S),
             C(C),
             meritFactor(meritFactor), 
@@ -47,11 +48,11 @@ class Sequence {
         inline double getMeritFactor() const { return this->meritFactor; }
         inline void setMeritFactor(double meritFactor) { this->meritFactor = meritFactor; }
 
-        inline unsigned int getPeakSidelobeLevel() const { return this->peakSidelobeLevel; }
-        inline void setPeakSidelobeLevel(unsigned int peakSidelobeLevel) { this->peakSidelobeLevel = peakSidelobeLevel; }
+        inline uint32_t getPeakSidelobeLevel() const { return this->peakSidelobeLevel; }
+        inline void setPeakSidelobeLevel(uint32_t peakSidelobeLevel) { this->peakSidelobeLevel = peakSidelobeLevel; }
 
-        inline unsigned int getEnergy() const { return this->energy; }
-        inline void setEnergy(unsigned int energy) { this->energy = energy; }
+        inline uint32_t getEnergy() const { return this->energy; }
+        inline void setEnergy(uint32_t energy) { this->energy = energy; }
 
         const std::string toString() const;
         

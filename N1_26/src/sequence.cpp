@@ -27,6 +27,8 @@ std::string Sequence::toBinaryString(const std::vector<int>& S) {
             case 1:
                 result += "0";
                 break;
+            default:
+                break;
         }
     }
 

@@ -5,19 +5,19 @@
 struct Runtime {
     std::chrono::time_point<std::chrono::steady_clock> start;
     std::chrono::time_point<std::chrono::steady_clock> end;
-    unsigned int duration;
+    double duration;
 };
 
 struct CpuTime {
     struct timespec start;
     struct timespec end;
-    unsigned int duration;
+    double duration;
 };
 
 struct EnergyConsumption {
-    unsigned long long start;
-    unsigned long long end;
-    unsigned int consumed;
+    uint64_t start;
+    uint64_t end;
+    uint64_t consumed;
 };
 
 class Metrics {
@@ -26,28 +26,34 @@ class Metrics {
         Runtime runtime;
         CpuTime cpuTime;
         EnergyConsumption energyConsumption;
-        unsigned int speed;
+        double speed;
 
-        const unsigned int getEnergyFromFile(const std::string& path) const;
+        const uint64_t getEnergyFromFile(const std::string& path) const;
     
     public:
+        Metrics() : 
+            runtime(),
+            cpuTime(),
+            energyConsumption(),
+            speed(0) { }
+
         Metrics(
             Runtime runtime,
             CpuTime cpuTime,
             EnergyConsumption energyConsumption,
-            unsigned int speed = 0
+            uint32_t speed = 0
         ) : runtime(), cpuTime(), 
             energyConsumption(), speed(speed) { }
 
         inline const Runtime getRuntime() const { return this->runtime; }
         inline const CpuTime getCpuTime() const { return this->cpuTime; }
         inline const EnergyConsumption getEnergyConsumption() const { return this->energyConsumption; }
-        inline const unsigned int getSpeed() const { return this->speed; }
-        unsigned int calculateSpeed(unsigned int nfes);
+        inline const double getSpeed() const { return this->speed; }
+        double calculateSpeed(uint32_t nfes);
 
         const std::string toString() const;
         
         void start();
         void end();
-        void calculate(unsigned int nfes);
+        void calculate(uint32_t nfes);
 };

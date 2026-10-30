@@ -1,0 +1,6 @@
+N3 PPR
+paraleliziranje celotnega algoritma
+
+OMP_NUM_THREAD
+
+#pragma omb barrier

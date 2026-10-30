@@ -15,7 +15,7 @@ const std::string Metrics::toString() const {
     return ss.str();
 }
 
-const unsigned int Metrics::getEnergyFromFile(const std::string& path) const {
+const uint64_t Metrics::getEnergyFromFile(const std::string& path) const {
     std::string result = "";
     std::string str = "";
     std::ifstream file(path);
@@ -27,13 +27,13 @@ const unsigned int Metrics::getEnergyFromFile(const std::string& path) const {
     return std::stoul(result);
 }
 
-unsigned int Metrics::calculateSpeed(unsigned int nfes) {
-    unsigned int time = this->runtime.duration;
+double Metrics::calculateSpeed(uint32_t nfes) {
+    double time = this->runtime.duration;
     
     // runtime in ms => * 1000
-    unsigned int result = (float)((float)nfes / (float)time) * 1000.0f;
+    double result = ((double)nfes / time) * 1000.0;
 
-    return (unsigned int)result;
+    return result;
 }
 
 
@@ -49,15 +49,17 @@ void Metrics::end() {
     this->runtime.end = std::chrono::steady_clock::now();
 }
 
-void Metrics::calculate(unsigned int nfes = 0) {
-    this->energyConsumption.consumed = (unsigned int)((this->energyConsumption.end - this->energyConsumption.start) / 1000);
+void Metrics::calculate(uint32_t nfes = 0) {
+    this->energyConsumption.consumed = (this->energyConsumption.end - this->energyConsumption.start) / 1000;
 
-    this->cpuTime.duration = (unsigned int)
+    this->cpuTime.duration =
         ((this->cpuTime.end.tv_sec - this->cpuTime.start.tv_sec) * 1000.0 +
         (this->cpuTime.end.tv_nsec - this->cpuTime.start.tv_nsec) / 1000000.0);
 
     this->runtime.duration = 
-        (std::chrono::duration_cast<std::chrono::nanoseconds>(this->runtime.end - this->runtime.start).count()) / 1000000;
+        (std::chrono::duration_cast<std::chrono::nanoseconds>
+            (this->runtime.end - this->runtime.start)
+            .count()) / 1000000.0;
 
     this->speed = this->calculateSpeed(nfes);
 }
