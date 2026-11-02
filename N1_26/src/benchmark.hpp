@@ -1,3 +1,5 @@
+#pragma once
+
 #include "solver.hpp"
 
 struct BestResult {
@@ -28,6 +30,18 @@ class Benchmark {
             const uint32_t maxNumberOfThreads
         ) : L(L), nfesLmt(nfesLmt), maxNumberOfThreads(maxNumberOfThreads),
             seeds(), solver(), initialSolver(), solvers() {
+            if((int32_t)maxNumberOfThreads < 1) {
+                throw std::logic_error("Number of threads must be equal to or greater than 1.");
+            }
+
+            if((int32_t)L <= 0) {
+                throw std::logic_error("Length of a sequence must be greater than 0.");
+            }
+
+            if((int32_t)nfesLmt < 0) {
+                throw std::logic_error("Number of maximal evaluations must be greater than 0.");
+            }
+
             for(int i = 0; i < 3; i++) {
                 seeds.push_back(initialSeed + i);
             }

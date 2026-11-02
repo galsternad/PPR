@@ -1,0 +1,3 @@
+/home/gal/Documents/Faks/PPR/N2_26/CMakeFiles/main.dir
+/home/gal/Documents/Faks/PPR/N2_26/CMakeFiles/edit_cache.dir
+/home/gal/Documents/Faks/PPR/N2_26/CMakeFiles/rebuild_cache.dir

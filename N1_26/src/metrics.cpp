@@ -27,13 +27,13 @@ const uint64_t Metrics::getEnergyFromFile(const std::string& path) const {
     return std::stoul(result);
 }
 
-double Metrics::calculateSpeed(uint32_t nfes) {
+uint32_t Metrics::calculateSpeed(uint32_t nfes) {
     double time = this->runtime.duration;
     
     // runtime in ms => * 1000
     double result = ((double)nfes / time) * 1000.0;
 
-    return result;
+    return (uint32_t)result;
 }
 
 

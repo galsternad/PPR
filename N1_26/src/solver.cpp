@@ -1,4 +1,5 @@
 #include "solver.hpp"
+#include "calculator.hpp"
 #include <stdexcept>
 #include <string>
 #include <sys/time.h>
@@ -154,20 +155,18 @@ NeighbourResult Solver::evaluateNeighboursSDLS(uint32_t start, uint32_t end) {
 bool Solver::updateBestNeighbour(uint32_t index, uint32_t energy) {
     auto currentEnergy = this->currentSequence.getEnergy();
     
+    if(energy >= currentEnergy) {
+        return false;
+    }
+    
     // copy the sequence for flip
     auto newS = this->currentSequence.getS();
     // flip bit
     newS[index] *= -1;
     auto newC = Calculator::calculateC(newS);
-    auto newEnergy = energy;
-    
-    if(newEnergy >= currentEnergy) {
-        return false;
-    }
-    
-    auto newMeritFactor = Calculator::calculateMeritFactor(newS, newC, newEnergy);
+    auto newMeritFactor = Calculator::calculateMeritFactor(newS, newC, energy);
     auto newPeakSidelobeLevel = Calculator::calculatePeakSidelobeLevel(newC);
-    this->currentSequence = Sequence(newS, newC, newMeritFactor, newPeakSidelobeLevel, newEnergy);
+    this->currentSequence = Sequence(newS, newC, newMeritFactor, newPeakSidelobeLevel, energy);
     this->T = Calculator::calculateT(newS);
     
     return true;

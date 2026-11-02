@@ -1,5 +1,8 @@
 #include "solver.hpp"
 #include "calculator.hpp"
+#include "random_generator.hpp"
+#include "sequence.hpp"
+#include <iostream>
 #include <stdexcept>
 #include <string>
 #include <sys/time.h>
@@ -32,7 +35,25 @@ const std::string Solver::toString() const {
     return ss.str();
 }
 
-NeighbourResultNaive Solver::evaluateNeighboursRandom(
+NeighbourResult Solver::evaluateNeighboursRandom(uint32_t t) {
+    auto localRandomGenerator = RandomGenerator(seed + t);
+    auto S = localRandomGenerator.generateSequence(this->L);
+    auto C = Calculator::calculateC(S);
+    auto energy = Calculator::calculateEnergy(C);
+    auto meritFactor = Calculator::calculateMeritFactor(S, C, energy);
+    auto peakSidelobeLevel = Calculator::calculatePeakSidelobeLevel(C);
+    auto sequence = Sequence(
+        S,
+        C,
+        meritFactor,
+        peakSidelobeLevel,
+        energy
+    );
+
+    return { 0, 0, 1, true, sequence };
+}
+
+NeighbourResult Solver::evaluateNeighboursRandom(
     uint32_t start, 
     uint32_t end,
     uint32_t t
@@ -56,17 +77,19 @@ NeighbourResultNaive Solver::evaluateNeighboursRandom(
         evaluations++;
     }
 
-    return { localBest, evaluations };
+    return { 0, 0, evaluations, true, localBest };
 }
 
 void Solver::createThreadsRandom(
     std::vector<std::thread>& workers,
-    std::vector<NeighbourResultNaive>& results
+    std::vector<NeighbourResult>& results
 ) {
     for(int t = 0; t < this->threads; t++) {
         const uint32_t chunkSize = this->nfesLmt / this->threads;
         const uint32_t start = t * chunkSize;
-        const uint32_t end = (t + 1) * chunkSize;
+        const uint32_t end = (t == this->threads - 1)
+            ? this->nfesLmt
+            : start + chunkSize;
         
         workers.emplace_back([&, start, end, t]() {
             results[t] = evaluateNeighboursRandom(start, end, t);
@@ -78,13 +101,47 @@ void Solver::createThreadsRandom(
     }
 }
 
+void Solver::evaluateRandomQueue() {
+    for(int t = 0; t < this->nfesLmt; t++) {
+        auto canExecute = tasksQueue.push([this, t]() {
+            auto result = evaluateNeighboursRandom(t);
+            resultsQueue.push(result);
+        });
+
+        if(!canExecute) {
+            throw std::logic_error("Cannot execute tasks.");
+        }
+    }
+
+    for(int t = 0; t < this->nfesLmt; t++) {
+        NeighbourResult result;
+
+        auto canExecute = resultsQueue.pop(result);
+
+        if(!canExecute) {
+            throw std::logic_error("Cannot retrieve result.");
+        }
+
+        if(result.sequence.getEnergy() < this->bestSequence.getEnergy()) {
+            this->bestSequence = result.sequence;
+        }
+
+        this->nfes += result.numberOfEvaluations;
+    }
+}
+
 void Solver::randomSearch() {
     this->bestSequence = Sequence();
 
     auto workers = std::vector<std::thread>();
-    auto results = std::vector<NeighbourResultNaive>(this->threads);
+    auto results = std::vector<NeighbourResult>(this->threads);
 
-    this->createThreadsRandom(workers, results);
+    if(parallelMode == ParallelMode::PRODUCER_CONSUMER) {
+        evaluateRandomQueue();
+    }
+    else if(parallelMode == ParallelMode::THREADS) {
+        createThreadsRandom(workers, results);
+    }
 
     for(const auto& result : results) {
         if(result.sequence.getEnergy() < this->bestSequence.getEnergy()) {
@@ -128,6 +185,29 @@ std::vector<int> Solver::getFlippedVector(const std::vector<int>& S, uint32_t in
     return vec;
 }
 
+NeighbourResult Solver::evaluateNeighboursSDLS(int i) {
+    uint32_t bestIndex = 0;
+    auto bestEnergy = std::numeric_limits<uint32_t>::max();
+    uint32_t evaluations = 0;
+    
+    auto neighbourEnergy = this->valueFlip(
+        this->currentSequence.getS(), 
+        this->currentSequence.getC(), 
+        this->T, 
+        i
+    );
+    
+    if(neighbourEnergy < bestEnergy) {
+        bestEnergy = neighbourEnergy;
+        bestIndex = i;
+    }
+
+    evaluations++;
+
+    return { bestIndex, bestEnergy, evaluations, false };
+
+}
+
 NeighbourResult Solver::evaluateNeighboursSDLS(uint32_t start, uint32_t end) {
     uint32_t bestIndex = 0;
     auto bestEnergy = std::numeric_limits<uint32_t>::max();
@@ -149,7 +229,7 @@ NeighbourResult Solver::evaluateNeighboursSDLS(uint32_t start, uint32_t end) {
         evaluations++;
     }
     
-    return NeighbourResult { bestIndex, bestEnergy, evaluations, false };
+    return { bestIndex, bestEnergy, evaluations, false };
 }
 
 bool Solver::updateBestNeighbour(uint32_t index, uint32_t energy) {
@@ -172,24 +252,62 @@ bool Solver::updateBestNeighbour(uint32_t index, uint32_t energy) {
     return true;
 }
 
-void Solver::createThreadsSDLS(
-    std::vector<std::thread>& workers,
-    std::vector<NeighbourResult>& results
+void Solver::evaluateSDLSQueue(
+    uint32_t& bestEnergy,
+    uint32_t& bestIndex
 ) {
-    for(int t = 0; t < this->threads; t++) {
-        const uint32_t chunkSize = this->L / this->threads;
-        const uint32_t start = t * chunkSize;
-        const uint32_t end = (t == this->threads - 1) 
-            ? this->L
-            : start + chunkSize;
-
-        workers.emplace_back([&, t, start, end]() {
-            results[t] = evaluateNeighboursSDLS(start, end);
+    for(int i = 0; i < this->L; i++) {
+        auto canExecute = tasksQueue.push([this, i]() {
+            auto result = evaluateNeighboursSDLS(i);
+            resultsQueue.push(result);
         });
+    
+        if(!canExecute) {
+            throw std::logic_error("Cannot execute tasks.");
+        }
     }
 
-    for(auto& t : workers) {
-        t.join();
+    for(int i = 0; i < this->L; i++) {
+        NeighbourResult result;
+
+        auto canExecute = resultsQueue.pop(result);
+
+        if(!canExecute) {
+            throw std::logic_error("Cannot retrieve result.");
+        }
+
+        if(result.energy < bestEnergy) {
+            bestEnergy = result.energy;
+            bestIndex = result.index;
+        }
+
+        this->nfes += result.numberOfEvaluations;
+    }
+
+}
+
+void Solver::evaluateSDLSThreads(
+    uint32_t &bestEnergy,
+    uint32_t &bestIndex
+) {
+    std::vector<std::thread> threads;
+    std::vector<NeighbourResult> results(this->threads);
+
+    createThreads(
+        threads,
+        results,
+        [this](uint32_t start, uint32_t end) {
+            return evaluateNeighboursSDLS(start, end);
+        }
+    );
+    
+    for(const auto& result : results) {
+        if(result.energy < bestEnergy) {
+            bestEnergy = result.energy;
+            bestIndex = result.index;
+        }
+
+        this->nfes += result.numberOfEvaluations;
     }
 }
 
@@ -210,19 +328,15 @@ void Solver::steepestDescentLocalSearch() {
             
             uint32_t bestIndex = 0;
             auto bestEnergy = std::numeric_limits<uint32_t>::max();
-            std::vector<std::thread> threads;
-            std::vector<NeighbourResult> results(this->threads);
-            this->createThreadsSDLS(threads, results);
-            
-            for(const auto& result : results) {
-                if(result.energy < bestEnergy) {
-                    bestEnergy = result.energy;
-                    bestIndex = result.index;
-                }
 
-                this->nfes += result.numberOfEvaluations;
+            if(parallelMode == ParallelMode::PRODUCER_CONSUMER) {
+                evaluateSDLSQueue(bestEnergy, bestIndex);
             }
-
+            else if(parallelMode == ParallelMode::THREADS) {
+                evaluateSDLSThreads(bestEnergy, bestIndex);
+            }
+        
+        
             canImprove = this->updateBestNeighbour(bestIndex, bestEnergy);
         }
         
@@ -242,6 +356,37 @@ void Solver::steepestDescentLocalSearch() {
 }
 
 NeighbourResult Solver::evaluateNeighboursTabu(
+    const int k,
+    const int i,
+    const Sequence& runBestSequence,
+    const std::vector<int>& M
+) {
+    uint32_t bestIndex = 0;
+    auto bestEnergy = std::numeric_limits<uint32_t>::max();
+    uint32_t evaluations = 0;
+    auto foundMove = false;
+    
+    auto energy = this->valueFlip(
+        this->currentSequence.getS(),
+        this->currentSequence.getC(),
+        this->T,
+        i
+    );
+    
+    if((k >= M[i]) || (energy < runBestSequence.getEnergy())) {
+        if(energy < bestEnergy) {
+            bestEnergy = energy;
+            bestIndex = i;
+            foundMove = true;
+        }
+    }
+
+    evaluations++;
+
+    return { bestIndex, bestEnergy, evaluations, foundMove };
+}
+
+NeighbourResult Solver::evaluateNeighboursTabu( 
     const uint32_t start,
     const uint32_t end,
     const int k,
@@ -250,8 +395,8 @@ NeighbourResult Solver::evaluateNeighboursTabu(
 ) {
     uint32_t bestIndex = 0;
     auto bestEnergy = std::numeric_limits<uint32_t>::max();
-    auto foundMove = false;
     uint32_t evaluations = 0;
+    auto foundMove = false;
     
     for(int i = start; i < end; i++) {
         auto energy = this->valueFlip(
@@ -275,35 +420,78 @@ NeighbourResult Solver::evaluateNeighboursTabu(
     return { bestIndex, bestEnergy, evaluations, foundMove };
 }
 
-void Solver::createThreadsTabu(
-    std::vector<std::thread>& workers,
-    std::vector<NeighbourResult>& results,
-    const int k,
+void Solver::evaluateTabuQueue(
+    uint32_t& bestEnergy,
+    uint32_t& bestIndex,
+    bool& foundMove,
+    int k,
     const Sequence& runBestSequence,
-    const std::vector<int>& M
+    const std::vector<int>& M 
 ) {
-    for(int t = 0; t < this->threads; t++) {
-        const uint32_t chunkSize = this->L / this->threads;
-        const uint32_t start = t * chunkSize;
-        const uint32_t end = (t == this->threads - 1)
-        ? this->L
-        : start + chunkSize;
+    for(int i = 0; i < this->L; i++ ) {
+        auto canExecute = tasksQueue.push([this, k, i, &runBestSequence, &M]() {
+            auto result = evaluateNeighboursTabu(k, i, runBestSequence, M);
+            resultsQueue.push(result);
+        });
 
-        workers.emplace_back([&, t, start, end, k]() {
-            results[t] = evaluateNeighboursTabu(
+        if(!canExecute) {
+            throw std::logic_error("Cannot execute tasks.");
+        }
+    }
+
+    for(int i = 0; i < this->L; i++) {
+        NeighbourResult result;
+
+        auto canExecute = resultsQueue.pop(result);
+
+        if(!canExecute) {
+            throw std::logic_error("Cannot retrieve result.");
+        }
+
+        if(result.foundMove && result.energy < bestEnergy) {
+            bestEnergy = result.energy;
+            bestIndex = result.index;
+            foundMove = true;
+        }
+
+        this->nfes += result.numberOfEvaluations;
+    }
+}
+
+void Solver::evaluateTabuThreads(
+    uint32_t& bestEnergy,
+    uint32_t& bestIndex,
+    bool& foundMove,
+    int k,
+    const Sequence& runBestSequence,
+    const std::vector<int>& M 
+) {
+    std::vector<std::thread> workers;
+    std::vector<NeighbourResult> results(this->threads);
+
+    createThreads(
+        workers,
+        results,
+        [this, k, &runBestSequence, &M](uint32_t start, uint32_t end) {
+            return evaluateNeighboursTabu(
                 start,
                 end,
                 k,
                 runBestSequence,
-                M  
+                M
             );
-        });
-    }
+        }
+    );
     
-    for(auto& t : workers) {
-        t.join();
-    }
+    for(const auto& result : results) {
+        if(result.foundMove && result.energy < bestEnergy) {
+            bestEnergy = result.energy;
+            bestIndex = result.index;
+            foundMove = true;
+        }
 
+        this->nfes += result.numberOfEvaluations;
+    }
 }
 
 void Solver::tabuSearch() {
@@ -336,24 +524,25 @@ void Solver::tabuSearch() {
             uint32_t bestIndex = 0;
             
             // threading
-            std::vector<std::thread> workers;
-            std::vector<NeighbourResult> results(this->threads);
-            this->createThreadsTabu(
-                workers,
-                results,
-                k,
-                runBestSequence,
-                M
-            );
-            
-            for(const auto& result : results) {
-                if(result.foundMove && result.energy < bestEnergy) {
-                    bestEnergy = result.energy;
-                    bestIndex = result.index;
-                    foundMove = true;
-                }
-
-                this->nfes += result.numberOfEvaluations;
+            if(this->parallelMode == ParallelMode::PRODUCER_CONSUMER) {
+                evaluateTabuQueue(
+                    bestEnergy,
+                    bestIndex,
+                    foundMove,
+                    k,
+                    runBestSequence,
+                    M
+                );
+            }
+            else if(this->parallelMode == ParallelMode::THREADS){
+                evaluateTabuThreads(
+                    bestEnergy,
+                    bestIndex,
+                    foundMove,
+                    k,
+                    runBestSequence,
+                    M
+                );
             }
             
             if(!foundMove) {
@@ -371,8 +560,7 @@ void Solver::tabuSearch() {
             
             if(this->currentSequence.getEnergy() < runBestSequence.getEnergy()) {
                 runBestSequence = this->currentSequence;
-            }
-            
+            }    
         }
         
         if(runBestSequence.getEnergy() < this->bestSequence.getEnergy()) {
@@ -390,21 +578,21 @@ void Solver::tabuSearch() {
     }
 }
 
-void Solver::solve(uint32_t arg) {
+void Solver::solve(Algorithm arg) {
     this->metrics.start();
     
     switch(arg) {
-        case RANDOM_SEARCH:
+        case Algorithm::RANDOM_SEARCH:
             this->randomSearch();
-            this->algorithmUsed = RANDOM_SEARCH;
+            this->algorithm = Algorithm::RANDOM_SEARCH;
             break;
-        case SDLS:
+        case Algorithm::SDLS:
             this->steepestDescentLocalSearch();
-            this->algorithmUsed = SDLS;
+            this->algorithm = Algorithm::SDLS;
             break;
-        case TABU_SEARCH:
+        case Algorithm::TABU_SEARCH:
             this->tabuSearch();
-            this->algorithmUsed = TABU_SEARCH;
+            this->algorithm = Algorithm::TABU_SEARCH;
             break;
         default:
             throw std::logic_error("Invalid argument");

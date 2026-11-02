@@ -1,5 +1,6 @@
 #include "calculator.hpp"
 #include <numeric>
+#include <cmath>
 
 std::vector<std::vector<int>> Calculator::calculateT(const std::vector<int>& S) {
     uint32_t L = S.size();

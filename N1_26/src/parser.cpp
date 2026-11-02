@@ -30,16 +30,20 @@ void Parser::parse() {
             continue;
         }
         
+        if(i + 1 >= this->argumentCount) {
+            throw std::logic_error("Missing value for argument: " + arg);
+        }
+
         valueStr = this->argumentList[++i];
         value = std::stoi(valueStr);
 
         if(arg == "-L") {
             argumentsMap["-L"] = value;
         }
-        else if(arg == "--seed" || arg == "-s") {
+        else if(arg == "--seed") {
             argumentsMap["--seed"] = value;
         }
-        else if(arg == "--nfesLmt" || arg == "-n") {
+        else if(arg == "--nfesLmt") {
             argumentsMap["--nfesLmt"] = value;
         }
         else if(arg == "-t") {

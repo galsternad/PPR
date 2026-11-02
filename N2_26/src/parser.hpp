@@ -20,7 +20,8 @@ class Parser {
             { "--seed",        time(nullptr)   },
             { "--nfesLmt",     1000000         },
             { "-t",            1               },
-            { "-a",            2               }
+            { "-a",            2               },
+            { "-p",            0               }
         };
 
     public:
@@ -29,5 +30,6 @@ class Parser {
             argumentList(argv) { }
 
         void parse();
+        const void printHelp() const;
         inline const std::map<std::string, uint32_t> getArgumentsMap() const { return this->argumentsMap; }
 };

@@ -1,5 +1,3 @@
-#include "sync_queue.hpp"
-
 template <typename T>
 bool SyncQueue<T>::push(const T& task) {
     std::unique_lock<std::mutex> lock(mutex);

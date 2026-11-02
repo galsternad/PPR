@@ -4,6 +4,8 @@
 #include <string>
 #include <limits.h>
 
+#pragma once
+
 class Sequence {
     private:
         std::vector<int> S;

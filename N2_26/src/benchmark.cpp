@@ -9,29 +9,35 @@ uint32_t Benchmark::iteration = 0;
 const std::string Benchmark::toString() const {
     std::stringstream ss;
     
+    for(auto& s : results) {
+        ss << s.toString() << "\n";
+        ss << "-----------------------------------------------------\n";
+    }
+
     ss << std::left << std::setw(16) << "ALGORITHM" 
-       << std::left << std::setw(8) << "THREADS" 
+       << std::left << std::setw(8)  << "THREADS" 
        << std::left << std::setw(12) << "ENERGY" 
        << std::left << std::setw(12) << "SPEED"
-       << std::left << "SEED\n";
-    ss << "---------------" << "---------------" << "---------------\n";
-
-    for(auto& s : solvers) {
-        switch(s.getAlgorithmUsed()) {
-            case RANDOM_SEARCH:
+       << std::left << std::setw(16) << "SEED"
+       << std::left << std::setw(16) << "PARALLEL MODE\n";
+    ss << "---------------" << "---------------" << "---------------"
+       << "---------------" << "---------------" << "---------------\n";
+    for(auto& s : results) {
+        switch(s.algorithm) {
+            case Algorithm::RANDOM_SEARCH:
                 ss << std::left << std::setw(16) << "Random search";
                 break;
-            case SDLS:
+            case Algorithm::SDLS:
                 ss << std::left << std::setw(16) << "SDLS";
                 break;
-            case TABU_SEARCH:
+            case Algorithm::TABU_SEARCH:
                 ss << std::left << std::setw(16) << "Tabu search";
                 break;
             default:
                 break;
         }
 
-        ss << std::left << std::setw(8) << s.getThreads();
+        ss << std::left << std::setw(8) << s.threads;
 
         std::stringstream energy, speed;
         energy << std::fixed << std::setprecision(2) << calculateEnergyConsumptionImprovement(s) << "%";
@@ -39,7 +45,19 @@ const std::string Benchmark::toString() const {
 
         ss << std::left << std::setw(12) << energy.str();
         ss << std::left << std::setw(12) << speed.str();
-        ss << std::left << s.getSeed();
+        ss << std::left << std::setw(16) << s.seed;
+        
+        switch(s.parallelMode) {
+            case ParallelMode::THREADS:
+                ss << std::left << std::setw(16) << "Threads";
+                break;
+            case ParallelMode::PRODUCER_CONSUMER:
+                ss << std::left << std::setw(16) << "Producer/consumer";
+                break;
+            default:
+                break;
+        }
+
         ss << "\n";
     }
 
@@ -47,71 +65,93 @@ const std::string Benchmark::toString() const {
     ss << "BEST SEQUENCE FOUND:                     \n";
     ss << getBestResult().sequence.toString()   << "\n";
     ss << getBestResult().metrics.toString()    << "\n";
+    ss << "nfesLmt:                 " << nfesLmt << "\n";
+    ss << "max number of threads:   " << maxNumberOfThreads << "\n";
 
     return ss.str();
 }
 
-const double Benchmark::calculateEnergyConsumptionImprovement(const Solver &solver) const {
-    auto initialSolverConsumedPower = (double)this->initialSolver.getMetrics().getEnergyConsumption().consumed;
-    auto parameterSolverConsumedPower = (double)solver.getMetrics().getEnergyConsumption().consumed;
+const double Benchmark::calculateEnergyConsumptionImprovement(const Result& resultObj) const {
+    auto initialSolverConsumedPower = (double)this->initialResult.metrics.getEnergyConsumption().consumed;
+    auto parameterSolverConsumedPower = (double)resultObj.metrics.getEnergyConsumption().consumed;
 
     double result = (parameterSolverConsumedPower / initialSolverConsumedPower) * 100.0;
 
     return result;
 }
 
-const double Benchmark::calculateSpeedImprovement(const Solver &solver) const {
-    auto initialSolverSpeed = this->initialSolver.getMetrics().getSpeed();
-    auto parameterSolverSpeed = solver.getMetrics().getSpeed();
-    std::cout << initialSolverSpeed << ", " << parameterSolverSpeed << std::endl;
+const double Benchmark::calculateSpeedImprovement(const Result& resultObj) const {
+    auto initialSolverSpeed = (double)this->initialResult.metrics.getSpeed();
+    auto parameterSolverSpeed = (double)resultObj.metrics.getSpeed();
 
     double result = (parameterSolverSpeed / initialSolverSpeed) * 100.0 ;
 
     return result;
 }
 
-void Benchmark::evaluateThreads(uint32_t seed, uint32_t algorithm) {
+void Benchmark::evaluateThreads(uint32_t seed, Algorithm algorithm, ParallelMode parallelMode) {
     for(int t = 1; t <= this->maxNumberOfThreads; t *= 2) {
-        this->solver = Solver(this->L, seed, this->nfesLmt, t);
+        Solver solver(this->L, seed, this->nfesLmt, t, parallelMode);
 
-        this->solver.solve(algorithm);
+        solver.solve(algorithm);
 
-        // vzamemo prve rezultate, s katerimi primerjamo pohitritve
+        auto nfes = solver.getNfes();
+        auto threads = t;
+        auto sequence = solver.getBestSequence();
+        auto metrics = solver.getMetrics();
+        auto result = Result(
+            this->L,
+            seed,
+            nfes,
+            threads,
+            algorithm,
+            parallelMode,
+            sequence,
+            metrics
+        );
+
         if(this->iteration == 0) {
-            this->initialSolver = this->solver;
+            this->initialResult = result;
         
             this->iteration++;
         }
 
-        solvers.push_back(this->solver);
+        results.push_back(result);
     }
 }
 
-void Benchmark::evaluateAlgorithms(uint32_t seed) {
-    for(int a = RANDOM_SEARCH; a <= TABU_SEARCH; a++) {
-        evaluateThreads(seed, a);
+void Benchmark::evaluateAlgorithms(uint32_t seed, ParallelMode parallelMode) {
+    for(int a = Algorithm::RANDOM_SEARCH; a <= Algorithm::TABU_SEARCH; a++) {
+        auto algorithm = (Algorithm)(a);
+        
+        evaluateThreads(seed, algorithm, parallelMode);
+    }
+}
+
+void Benchmark::evaluateSeeds(ParallelMode parallelMode) {
+    for(int s = 0; s < this->seeds.size(); s++) {
+        auto currentSeed = this->seeds[s];
+
+        evaluateAlgorithms(currentSeed, parallelMode);
     }
 }
 
 void Benchmark::run() {
-    // seeds
-    for(int s = 0; s < this->seeds.size(); s++) {
-        auto currentSeed = this->seeds[s];
-
-        this->evaluateAlgorithms(currentSeed);
+    for(int p = ParallelMode::THREADS; p <= ParallelMode::PRODUCER_CONSUMER; p++) {
+        evaluateSeeds((ParallelMode) p);
     }
 }
 
-const BestResult Benchmark::getBestResult() const {
+const Result Benchmark::getBestResult() const {
     auto sequence = Sequence();
     auto metrics = Metrics();
+    auto result = Result();
 
-    for(auto& s : solvers) {
-        if(s.getBestSequence().getEnergy() < sequence.getEnergy()) {
-            sequence = s.getBestSequence();
-            metrics = s.getMetrics();
+    for(auto& s : results) {
+        if(s.sequence.getEnergy() < sequence.getEnergy()) {
+            result = s;
         }
     }
 
-    return { sequence, metrics };
+    return result;
 }

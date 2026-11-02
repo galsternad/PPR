@@ -14,3 +14,12 @@ class Reactor : public Thread<T> {
 
         virtual void run(SyncQueue<T>& tasks) override;
 };
+
+template <typename T>
+void Reactor<T>::run(SyncQueue<T>& tasks) {
+    T task = T();
+
+    while(tasks.pop(task)) {
+        task();
+    }
+}

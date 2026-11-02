@@ -1,5 +1,8 @@
 #include "benchmark.hpp"
+#include "solver.hpp"
 #include <iomanip>
+#include <iostream>
+#include <sstream>
 
 uint32_t Benchmark::iteration = 0;
 
@@ -85,7 +88,7 @@ void Benchmark::evaluateThreads(uint32_t seed, uint32_t algorithm) {
 }
 
 void Benchmark::evaluateAlgorithms(uint32_t seed) {
-    for(int a = 1; a < 3; a++) {
+    for(int a = RANDOM_SEARCH; a <= TABU_SEARCH; a++) {
         evaluateThreads(seed, a);
     }
 }

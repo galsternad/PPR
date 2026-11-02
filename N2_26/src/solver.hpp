@@ -1,18 +1,24 @@
 #include "random_generator.hpp"
 #include "sequence.hpp"
 #include "metrics.hpp"
+#include "sync_queue.hpp"
+#include "reactor.hpp"
+#include <functional>
+#include <memory>
 #include <stdexcept>
 #include <thread>
 
 #pragma once
 
-#define RANDOM_SEARCH  0
-#define SDLS           1
-#define TABU_SEARCH    2
+enum Algorithm {
+    RANDOM_SEARCH = 0,
+    SDLS          = 1,
+    TABU_SEARCH   = 2
+};
 
-struct NeighbourResultNaive {
-    Sequence sequence;
-    uint32_t numberOfEvaluations;
+enum ParallelMode {
+    THREADS             = 0,
+    PRODUCER_CONSUMER   = 1
 };
 
 struct NeighbourResult {
@@ -20,6 +26,7 @@ struct NeighbourResult {
     uint32_t energy;
     uint32_t numberOfEvaluations;
     bool foundMove;
+    Sequence sequence;
 };
 
 class Solver {
@@ -35,18 +42,30 @@ class Solver {
         Sequence currentSequence;
         Sequence bestSequence;
         RandomGenerator generator;
-        uint32_t algorithmUsed;
+        SyncQueue<std::function<void()>> tasksQueue;
+        SyncQueue<NeighbourResult> resultsQueue;
+        std::vector<std::unique_ptr<Reactor<std::function<void()>>>> reactors;
+        Algorithm algorithm;
+        ParallelMode parallelMode;
         
         uint32_t calculateSpeed() const;
         
         std::vector<int> getFlippedVector(const std::vector<int>& S, uint32_t index) const;
         
-        NeighbourResultNaive evaluateNeighboursRandom(
+        NeighbourResult evaluateNeighboursRandom(uint32_t t);
+        NeighbourResult evaluateNeighboursRandom(
             uint32_t start,
             uint32_t end,
             uint32_t t
         );
+        NeighbourResult evaluateNeighboursSDLS(int i);
         NeighbourResult evaluateNeighboursSDLS(uint32_t start, uint32_t end);
+        NeighbourResult evaluateNeighboursTabu(
+            const int k,
+            const int i,
+            const Sequence& runBestSequence,
+            const std::vector<int>& M
+        );
         NeighbourResult evaluateNeighboursTabu(
             uint32_t start,
             uint32_t end,
@@ -57,21 +76,45 @@ class Solver {
 
         bool updateBestNeighbour(uint32_t index, uint32_t energy);
 
-        void createThreadsRandom(
-            std::vector<std::thread>& workers,
-            std::vector<NeighbourResultNaive>& results
+        void evaluateRandomQueue();
+        void evaluateSDLSQueue(
+            uint32_t& bestEnergy,
+            uint32_t& bestIndex
         );
-        void createThreadsSDLS(
+        void evaluateSDLSThreads(
+            uint32_t& bestEnergy,
+            uint32_t& bestIndex
+        );
+        void evaluateTabuQueue(
+            uint32_t& bestEnergy,
+            uint32_t& bestIndex,
+            bool& foundMove,
+            int k,
+            const Sequence& runBestSequence,
+            const std::vector<int>& M 
+        );
+        void evaluateTabuThreads(
+            uint32_t& bestEnergy,
+            uint32_t& bestIndex,
+            bool& foundMove,
+            int k,
+            const Sequence& runBestSequence,
+            const std::vector<int>& M 
+        );
+
+        void createThreadsRandom(
             std::vector<std::thread>& workers,
             std::vector<NeighbourResult>& results
         );
-        void createThreadsTabu(
+
+        template <typename Evaluator>
+        void createThreads(
             std::vector<std::thread>& workers,
             std::vector<NeighbourResult>& results,
-            const int k,
-            const Sequence& runBestSequence,
-            const std::vector<int>& M
+            Evaluator evaluator
         );
+
+        void startReactors();
         
     public:
         Solver(
@@ -81,7 +124,8 @@ class Solver {
             const uint32_t threads = 1
         ) : L(L), seed(seed), nfesLmt(nfesLmt), threads(threads),
             nfes(0), metrics(Runtime(), CpuTime(), EnergyConsumption()), 
-            currentSequence(), bestSequence(), generator(seed), algorithmUsed(0) { 
+            currentSequence(), bestSequence(), generator(seed), algorithm(TABU_SEARCH),
+            tasksQueue(), parallelMode() { 
             if((int32_t)threads < 1) {
                 throw std::logic_error("Number of threads must be greater than 0.");
             }
@@ -93,6 +137,53 @@ class Solver {
             if((int32_t)nfesLmt < 0) {
                 throw std::logic_error("Number of maximal evaluations must be greater than 0.");
             }
+
+            if(parallelMode == ParallelMode::PRODUCER_CONSUMER) {
+                for(uint32_t i = 0; i < this->threads; i++) {
+                    reactors.push_back(
+                        std::unique_ptr<Reactor<std::function<void()>>>(
+                            new Reactor<std::function<void()>>(tasksQueue)
+                        )
+                    );
+                }           
+            }
+        }
+
+                Solver(
+            const uint32_t L = 250,
+            const uint32_t seed = time(nullptr),
+            const uint32_t nfesLmt = 1000000,
+            const uint32_t threads = 1,
+            ParallelMode parallelMode = ParallelMode::THREADS
+        ) : L(L), seed(seed), nfesLmt(nfesLmt), threads(threads),
+            nfes(0), metrics(Runtime(), CpuTime(), EnergyConsumption()), 
+            currentSequence(), bestSequence(), generator(seed), algorithm(TABU_SEARCH),
+            tasksQueue(), parallelMode() { 
+            if((int32_t)threads < 1) {
+                throw std::logic_error("Number of threads must be greater than 0.");
+            }
+
+            if((int32_t)L <= 0) {
+                throw std::logic_error("Length of a sequence must be greater than 0.");
+            }
+
+            if((int32_t)nfesLmt < 0) {
+                throw std::logic_error("Number of maximal evaluations must be greater than 0.");
+            }
+
+            if(parallelMode == ParallelMode::PRODUCER_CONSUMER) {
+                for(uint32_t i = 0; i < this->threads; i++) {
+                    reactors.push_back(
+                        std::unique_ptr<Reactor<std::function<void()>>>(
+                            new Reactor<std::function<void()>>(tasksQueue)
+                        )
+                    );
+                }           
+            }
+        }
+
+        ~Solver() {
+            tasksQueue.stop();
         }
         
         inline const uint32_t getSeed() const { return this->seed; }
@@ -101,7 +192,7 @@ class Solver {
         inline const Metrics& getMetrics() const { return this->metrics; }
         inline const Sequence& getCurrentSequence() const { return this->currentSequence; }
         inline const Sequence& getBestSequence() const { return this->bestSequence; }
-        inline const uint32_t getAlgorithmUsed() const { return this->algorithmUsed; }
+        inline const Algorithm getAlgorithm() const { return this->algorithm; }
 
         const std::string toString() const;
         
@@ -116,5 +207,28 @@ class Solver {
         void randomSearch();
         void steepestDescentLocalSearch();        
         void tabuSearch();
-        void solve(uint32_t arg);
+        void solve(Algorithm arg);
 };
+
+template <typename Evaluator>
+void Solver::createThreads(
+    std::vector<std::thread>& workers,
+    std::vector<NeighbourResult>& results,
+    Evaluator evaluator
+) {
+    for(int t = 0; t < this->threads; t++) {
+        const uint32_t chunkSize = this->L / this->threads;
+        const uint32_t start = t * chunkSize;
+        const uint32_t end = (t == this->threads - 1) 
+            ? this->L
+            : start + chunkSize;
+
+        workers.emplace_back([&, t, start, end, evaluator]() {
+            results[t] = evaluator(start, end);
+        });
+    }
+
+    for(auto& t : workers) {
+        t.join();
+    }
+}

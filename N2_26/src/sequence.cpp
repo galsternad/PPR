@@ -9,9 +9,9 @@ const std::string Sequence::toString() const {
     auto bin = Sequence::toBinaryString(this->S);
     auto hex = Sequence::toHexadecimalString(bin);
 
-    ss << "sequence: " << hex << "\n";
-    ss << "MF: " << this->meritFactor << "\n"; 
-    ss << "PSL: " << this->peakSidelobeLevel;
+    ss << "sequence:                " << hex                    << "\n";
+    ss << "MF:                      " << this->meritFactor      << "\n"; 
+    ss << "PSL:                     " << this->peakSidelobeLevel;
 
     return ss.str();
 }

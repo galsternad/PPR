@@ -1,3 +1,5 @@
+#pragma once
+
 #include <chrono>
 #include <string>
 #include <time.h>
@@ -26,7 +28,7 @@ class Metrics {
         Runtime runtime;
         CpuTime cpuTime;
         EnergyConsumption energyConsumption;
-        double speed;
+        uint32_t speed;
 
         const uint64_t getEnergyFromFile(const std::string& path) const;
     
@@ -48,8 +50,8 @@ class Metrics {
         inline const Runtime getRuntime() const { return this->runtime; }
         inline const CpuTime getCpuTime() const { return this->cpuTime; }
         inline const EnergyConsumption getEnergyConsumption() const { return this->energyConsumption; }
-        inline const double getSpeed() const { return this->speed; }
-        double calculateSpeed(uint32_t nfes);
+        inline const uint32_t getSpeed() const { return this->speed; }
+        uint32_t calculateSpeed(uint32_t nfes);
 
         const std::string toString() const;
         

@@ -1,6 +1,7 @@
-#include <vector>
-#include <bits/stdc++.h>
+#pragma once
 
+#include <vector>
+#include <cstdint>
 
 class Calculator {
     public:

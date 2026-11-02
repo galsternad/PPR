@@ -1,5 +1,7 @@
 #include "parser.hpp"
+#include "solver.hpp"
 #include "benchmark.hpp"
+#include <iostream>
 
 void printHelp() {
     std::cout << "Usage:                                            " << std::endl;
@@ -90,7 +92,7 @@ int main(int argc, char** argv) {
         }
     }
     catch(const std::exception& e) {
-        std::cout << "Error: " << e.what() << std::endl;
+        std::cout << e.what() << std::endl;
     }
 
 }

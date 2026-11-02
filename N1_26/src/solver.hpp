@@ -1,9 +1,10 @@
 #include "random_generator.hpp"
 #include "sequence.hpp"
-#include "calculator.hpp"
 #include "metrics.hpp"
 #include <stdexcept>
 #include <thread>
+
+#pragma once
 
 #define RANDOM_SEARCH  0
 #define SDLS           1
@@ -39,6 +40,7 @@ class Solver {
         uint32_t calculateSpeed() const;
         
         std::vector<int> getFlippedVector(const std::vector<int>& S, uint32_t index) const;
+        
         NeighbourResultNaive evaluateNeighboursRandom(
             uint32_t start,
             uint32_t end,
@@ -80,10 +82,17 @@ class Solver {
         ) : L(L), seed(seed), nfesLmt(nfesLmt), threads(threads),
             nfes(0), metrics(Runtime(), CpuTime(), EnergyConsumption()), 
             currentSequence(), bestSequence(), generator(seed), algorithmUsed(0) { 
-            if(threads < 1) {
-                throw std::logic_error("Number of threads can't be lesser than 1.");
+            if((int32_t)threads < 1) {
+                throw std::logic_error("Number of threads must be greater than 0.");
             }
-                
+
+            if((int32_t)L <= 0) {
+                throw std::logic_error("Length of a sequence must be greater than 0.");
+            }
+
+            if((int32_t)nfesLmt < 0) {
+                throw std::logic_error("Number of maximal evaluations must be greater than 0.");
+            }
         }
         
         inline const uint32_t getSeed() const { return this->seed; }
