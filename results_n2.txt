@@ -1,0 +1,192 @@
+2015, 2015
+2015, 2057
+2015, 6004
+2015, 13482
+2015, 16358
+2015, 95150
+2015, 183305
+2015, 345939
+2015, 507073
+2015, 403984
+2015, 51672
+2015, 96838
+2015, 123259
+2015, 132044
+2015, 124640
+2015, 2006
+2015, 2050
+2015, 6001
+2015, 10718
+2015, 16277
+2015, 91639
+2015, 190390
+2015, 339890
+2015, 505307
+2015, 402307
+2015, 51446
+2015, 98184
+2015, 123168
+2015, 132282
+2015, 124326
+2015, 2022
+2015, 2047
+2015, 5990
+2015, 10433
+2015, 16289
+2015, 93110
+2015, 181993
+2015, 357815
+2015, 503454
+2015, 403715
+2015, 51307
+2015, 94434
+2015, 123641
+2015, 132157
+2015, 123906
+2015, 1992
+2015, 2049
+2015, 5990
+2015, 10166
+2015, 16104
+2015, 98108
+2015, 184967
+2015, 337251
+2015, 500139
+2015, 401020
+2015, 51260
+2015, 92581
+2015, 123346
+2015, 131854
+2015, 124932
+2015, 2005
+2015, 2057
+2015, 6003
+2015, 12021
+2015, 16307
+2015, 96855
+2015, 182153
+2015, 328130
+2015, 503447
+2015, 406074
+2015, 51437
+2015, 88113
+2015, 123599
+2015, 132688
+2015, 125568
+2015, 2049
+2015, 2049
+2015, 5988
+2015, 10767
+2015, 16341
+2015, 88688
+2015, 187579
+2015, 345774
+2015, 504964
+2015, 405624
+2015, 52913
+2015, 94090
+2015, 120918
+2015, 132592
+2015, 124599
+ALGORITHM       THREADS ENERGY      SPEED       SEED            PARALLEL MODE
+  ------------------------------------------------------------------------------------------
+Random search   1       100.00%     100.00%     0               Threads         
+Random search   2       340157551513007.56%102.08%     0               Threads         
+Random search   4       136063.16%  297.97%     0               Threads         
+Random search   8       99494.17%   669.08%     0               Threads         
+Random search   16      92426.52%   811.81%     0               Threads         
+SDLS            1       7606.75%    4722.08%    0               Threads         
+SDLS            2       4940.27%    9097.02%    0               Threads         
+SDLS            4       3261.20%    17168.19%   0               Threads         
+SDLS            8       2608.72%    25164.91%   0               Threads         
+SDLS            16      3196.66%    20048.83%   0               Threads         
+Tabu search     1       15228.93%   2564.37%    0               Threads         
+Tabu search     2       9183.42%    4805.86%    0               Threads         
+Tabu search     4       7828.14%    6117.07%    0               Threads         
+Tabu search     8       7390.28%    6553.05%    0               Threads         
+Tabu search     16      7978.06%    6185.61%    0               Threads         
+Random search   1       101.00%     99.55%      1               Threads         
+Random search   2       195346.84%  101.74%     1               Threads         
+Random search   4       136831.11%  297.82%     1               Threads         
+Random search   8       113436.03%  531.91%     1               Threads         
+Random search   16      92623.27%   807.79%     1               Threads         
+SDLS            1       7756.09%    4547.84%    1               Threads         
+SDLS            2       4819.38%    9448.64%    1               Threads         
+SDLS            4       3302.69%    16867.99%   1               Threads         
+SDLS            8       2709.28%    25077.27%   1               Threads         
+SDLS            16      3228.97%    19965.61%   1               Threads         
+Tabu search     1       15158.22%   2553.15%    1               Threads         
+Tabu search     2       9047.17%    4872.66%    1               Threads         
+Tabu search     4       7768.80%    6112.56%    1               Threads         
+Tabu search     8       7379.44%    6564.86%    1               Threads         
+Tabu search     16      8206.58%    6170.02%    1               Threads         
+Random search   1       100.83%     100.35%     2               Threads         
+Random search   2       340157551514548.56%101.59%     2               Threads         
+Random search   4       136375.66%  297.27%     2               Threads         
+Random search   8       115484.01%  517.77%     2               Threads         
+Random search   16      92530.24%   808.39%     2               Threads         
+SDLS            1       7756.81%    4620.84%    2               Threads         
+SDLS            2       5009.31%    9031.91%    2               Threads         
+SDLS            4       3154.20%    17757.57%   2               Threads         
+SDLS            8       2660.08%    24985.31%   2               Threads         
+SDLS            16      3179.22%    20035.48%   2               Threads         
+Tabu search     1       15147.54%   2546.25%    2               Threads         
+Tabu search     2       9310.92%    4686.55%    2               Threads         
+Tabu search     4       7788.46%    6136.03%    2               Threads         
+Tabu search     8       7431.15%    6558.66%    2               Threads         
+Tabu search     16      7894.80%    6149.18%    2               Threads         
+Random search   1       101.99%     98.86%      0               Producer/consumer
+Random search   2       192069.85%  101.69%     0               Producer/consumer
+Random search   4       136500.57%  297.27%     0               Producer/consumer
+Random search   8       116360.58%  504.52%     0               Producer/consumer
+Random search   16      93109.63%   799.21%     0               Producer/consumer
+SDLS            1       7563.49%    4868.88%    0               Producer/consumer
+SDLS            2       5004.41%    9179.50%    0               Producer/consumer
+SDLS            4       3285.93%    16737.02%   0               Producer/consumer
+SDLS            8       2630.52%    24820.79%   0               Producer/consumer
+SDLS            16      3199.94%    19901.74%   0               Producer/consumer
+Tabu search     1       15261.79%   2543.92%    0               Producer/consumer
+Tabu search     2       9501.86%    4594.59%    0               Producer/consumer
+Tabu search     4       7862.73%    6121.39%    0               Producer/consumer
+Tabu search     8       7403.63%    6543.62%    0               Producer/consumer
+Tabu search     16      7938.82%    6200.10%    0               Producer/consumer
+Random search   1       99.43%      99.50%      1               Producer/consumer
+Random search   2       340157551512601.25%102.08%     1               Producer/consumer
+Random search   4       135912.34%  297.92%     1               Producer/consumer
+Random search   8       106388.42%  596.58%     1               Producer/consumer
+Random search   16      92493.40%   809.28%     1               Producer/consumer
+SDLS            1       7566.61%    4806.70%    1               Producer/consumer
+SDLS            2       5000.17%    9039.85%    1               Producer/consumer
+SDLS            4       3335.77%    16284.37%   1               Producer/consumer
+SDLS            8       2673.17%    24984.96%   1               Producer/consumer
+SDLS            16      3194.76%    20152.56%   1               Producer/consumer
+Tabu search     1       15201.55%   2552.70%    1               Producer/consumer
+Tabu search     2       9877.60%    4372.85%    1               Producer/consumer
+Tabu search     4       7848.90%    6133.95%    1               Producer/consumer
+Tabu search     8       7362.36%    6585.01%    1               Producer/consumer
+Tabu search     16      8072.28%    6231.66%    1               Producer/consumer
+Random search   1       99.78%      101.69%     2               Producer/consumer
+Random search   2       194143.06%  101.69%     2               Producer/consumer
+Random search   4       137667.91%  297.17%     2               Producer/consumer
+Random search   8       113160.28%  534.34%     2               Producer/consumer
+Random search   16      92392.48%   810.97%     2               Producer/consumer
+SDLS            1       7777.93%    4401.39%    2               Producer/consumer
+SDLS            2       4887.28%    9309.13%    2               Producer/consumer
+SDLS            4       3242.14%    17160.00%   2               Producer/consumer
+SDLS            8       2665.31%    25060.25%   2               Producer/consumer
+SDLS            16      3174.24%    20130.22%   2               Producer/consumer
+Tabu search     1       14783.00%   2625.96%    2               Producer/consumer
+Tabu search     2       9414.00%    4669.48%    2               Producer/consumer
+Tabu search     4       8005.50%    6000.89%    2               Producer/consumer
+Tabu search     8       7398.16%    6580.25%    2               Producer/consumer
+Tabu search     16      7935.53%    6183.57%    2               Producer/consumer
+-----------------------------------------
+BEST SEQUENCE FOUND:                     
+sequence: 0x2EAF145AD4B1B072EEF49FC43DC201CB7F936CF387EDF5F44E83D8C8CE6C22A
+MF: 4.9035
+PSL: 16
+runtime:                 8023.85 ms
+CPU time:                18111.3 ms
+energy consumption:      430344 mJ
+speed:                   124599 nfes/s
+

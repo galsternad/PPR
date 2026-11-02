@@ -20,6 +20,8 @@ target_link_options(main PRIVATE
 target_sources(main
     PRIVATE
         "src/main.cpp"
+        "src/benchmark.hpp"
+        "src/benchmark.cpp"
         "src/calculator.hpp"
         "src/calculator.cpp"
         "src/metrics.hpp"

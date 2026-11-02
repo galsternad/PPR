@@ -1,0 +1,1454 @@
+L:                       64
+seed:                    0
+nfes:                    100000
+threads:                 1
+algorithm:               Random search
+mode:                    threads
+sequence:                0x0E5F5063927A66A9
+MF:                      2.76757
+PSL:                     11
+runtime:                 3608.25 ms
+CPU time:                3607.64 ms
+energy consumption:      167001 mJ
+speed:                   27714 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    100000
+threads:                 2
+algorithm:               Random search
+mode:                    threads
+sequence:                0x1CD4D6D3204E83C5
+MF:                      2.68063
+PSL:                     8
+runtime:                 1821.26 ms
+CPU time:                3640.08 ms
+energy consumption:      96546 mJ
+speed:                   54907 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    100000
+threads:                 4
+algorithm:               Random search
+mode:                    threads
+sequence:                0x1CD4D6D3204E83C5
+MF:                      2.68063
+PSL:                     8
+runtime:                 934.869 ms
+CPU time:                3715.85 ms
+energy consumption:      62425 mJ
+speed:                   106966 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    100000
+threads:                 8
+algorithm:               Random search
+mode:                    threads
+sequence:                0xC110A10FDB309ACA
+MF:                      2.99415
+PSL:                     8
+runtime:                 503.485 ms
+CPU time:                3868.58 ms
+energy consumption:      43384 mJ
+speed:                   198615 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    100000
+threads:                 16
+algorithm:               Random search
+mode:                    threads
+sequence:                0x1CD4D6D3204E83C5
+MF:                      2.68063
+PSL:                     8
+runtime:                 439.501 ms
+CPU time:                6861.9 ms
+energy consumption:      38418 mJ
+speed:                   227530 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    99943
+threads:                 1
+algorithm:               SDLS
+mode:                    threads
+sequence:                0x4BC3D7BA45DF59CC
+MF:                      4.97087
+PSL:                     6
+runtime:                 587.264 ms
+CPU time:                602.08 ms
+energy consumption:      25354 mJ
+speed:                   170184 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    99943
+threads:                 2
+algorithm:               SDLS
+mode:                    threads
+sequence:                0x4BC3D7BA45DF59CC
+MF:                      4.97087
+PSL:                     6
+runtime:                 425.117 ms
+CPU time:                586.065 ms
+energy consumption:      19948 mJ
+speed:                   235095 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    99943
+threads:                 4
+algorithm:               SDLS
+mode:                    threads
+sequence:                0x4BC3D7BA45DF59CC
+MF:                      4.97087
+PSL:                     6
+runtime:                 350.044 ms
+CPU time:                623.225 ms
+energy consumption:      18463 mJ
+speed:                   285515 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    99943
+threads:                 8
+algorithm:               SDLS
+mode:                    threads
+sequence:                0x4BC3D7BA45DF59CC
+MF:                      4.97087
+PSL:                     6
+runtime:                 486.754 ms
+CPU time:                930.632 ms
+energy consumption:      26170 mJ
+speed:                   205325 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    99943
+threads:                 16
+algorithm:               SDLS
+mode:                    threads
+sequence:                0x4BC3D7BA45DF59CC
+MF:                      4.97087
+PSL:                     6
+runtime:                 801.224 ms
+CPU time:                1498.34 ms
+energy consumption:      40959 mJ
+speed:                   124737 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    99991
+threads:                 1
+algorithm:               Tabu search
+mode:                    threads
+sequence:                0x45D367E2FF5A18E7
+MF:                      5.06931
+PSL:                     6
+runtime:                 548.424 ms
+CPU time:                562.834 ms
+energy consumption:      23983 mJ
+speed:                   182324 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    99991
+threads:                 2
+algorithm:               Tabu search
+mode:                    threads
+sequence:                0x45D367E2FF5A18E7
+MF:                      5.06931
+PSL:                     6
+runtime:                 467.474 ms
+CPU time:                632.56 ms
+energy consumption:      21554 mJ
+speed:                   213896 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    99991
+threads:                 4
+algorithm:               Tabu search
+mode:                    threads
+sequence:                0x45D367E2FF5A18E7
+MF:                      5.06931
+PSL:                     6
+runtime:                 353.949 ms
+CPU time:                630.219 ms
+energy consumption:      19194 mJ
+speed:                   282501 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    99991
+threads:                 8
+algorithm:               Tabu search
+mode:                    threads
+sequence:                0x45D367E2FF5A18E7
+MF:                      5.06931
+PSL:                     6
+runtime:                 491.552 ms
+CPU time:                945.386 ms
+energy consumption:      25746 mJ
+speed:                   203418 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    99991
+threads:                 16
+algorithm:               Tabu search
+mode:                    threads
+sequence:                0x45D367E2FF5A18E7
+MF:                      5.06931
+PSL:                     6
+runtime:                 810.731 ms
+CPU time:                1512.43 ms
+energy consumption:      41541 mJ
+speed:                   123334 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    100000
+threads:                 1
+algorithm:               Random search
+mode:                    threads
+sequence:                0x1CD4D6D3204E83C5
+MF:                      2.68063
+PSL:                     8
+runtime:                 3640.05 ms
+CPU time:                3639.14 ms
+energy consumption:      160972 mJ
+speed:                   27472 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    100000
+threads:                 2
+algorithm:               Random search
+mode:                    threads
+sequence:                0x1CD4D6D3204E83C5
+MF:                      2.68063
+PSL:                     8
+runtime:                 1832.34 ms
+CPU time:                3650.52 ms
+energy consumption:      94847 mJ
+speed:                   54575 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    100000
+threads:                 4
+algorithm:               Random search
+mode:                    threads
+sequence:                0x911F28D651D2D008
+MF:                      2.81319
+PSL:                     9
+runtime:                 942.07 ms
+CPU time:                3747.76 ms
+energy consumption:      63199 mJ
+speed:                   106149 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    100000
+threads:                 8
+algorithm:               Random search
+mode:                    threads
+sequence:                0xC110A10FDB309ACA
+MF:                      2.99415
+PSL:                     8
+runtime:                 500.841 ms
+CPU time:                3841.13 ms
+energy consumption:      43167 mJ
+speed:                   199664 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    100000
+threads:                 16
+algorithm:               Random search
+mode:                    threads
+sequence:                0x1CD4D6D3204E83C5
+MF:                      2.68063
+PSL:                     8
+runtime:                 457.03 ms
+CPU time:                6845.79 ms
+energy consumption:      39312 mJ
+speed:                   218803 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    99943
+threads:                 1
+algorithm:               SDLS
+mode:                    threads
+sequence:                0xD9109097455E390E
+MF:                      5.12
+PSL:                     5
+runtime:                 654.603 ms
+CPU time:                671.476 ms
+energy consumption:      27793 mJ
+speed:                   152677 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    99943
+threads:                 2
+algorithm:               SDLS
+mode:                    threads
+sequence:                0xD9109097455E390E
+MF:                      5.12
+PSL:                     5
+runtime:                 418.707 ms
+CPU time:                581.128 ms
+energy consumption:      19715 mJ
+speed:                   238694 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    99943
+threads:                 4
+algorithm:               SDLS
+mode:                    threads
+sequence:                0xD9109097455E390E
+MF:                      5.12
+PSL:                     5
+runtime:                 347.747 ms
+CPU time:                621.422 ms
+energy consumption:      17818 mJ
+speed:                   287401 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    99943
+threads:                 8
+algorithm:               SDLS
+mode:                    threads
+sequence:                0xD9109097455E390E
+MF:                      5.12
+PSL:                     5
+runtime:                 493.234 ms
+CPU time:                940.837 ms
+energy consumption:      26495 mJ
+speed:                   202628 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    99943
+threads:                 16
+algorithm:               SDLS
+mode:                    threads
+sequence:                0xD9109097455E390E
+MF:                      5.12
+PSL:                     5
+runtime:                 808.193 ms
+CPU time:                1505.6 ms
+energy consumption:      41629 mJ
+speed:                   123662 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    99994
+threads:                 1
+algorithm:               Tabu search
+mode:                    threads
+sequence:                0x2AA466D3FF0E5BC6
+MF:                      6.32099
+PSL:                     6
+runtime:                 594.42 ms
+CPU time:                609.742 ms
+energy consumption:      25372 mJ
+speed:                   168221 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    99994
+threads:                 2
+algorithm:               Tabu search
+mode:                    threads
+sequence:                0x2AA466D3FF0E5BC6
+MF:                      6.32099
+PSL:                     6
+runtime:                 424.213 ms
+CPU time:                587.159 ms
+energy consumption:      20395 mJ
+speed:                   235716 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    99994
+threads:                 4
+algorithm:               Tabu search
+mode:                    threads
+sequence:                0x2AA466D3FF0E5BC6
+MF:                      6.32099
+PSL:                     6
+runtime:                 359.802 ms
+CPU time:                635.777 ms
+energy consumption:      19470 mJ
+speed:                   277914 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    99994
+threads:                 8
+algorithm:               Tabu search
+mode:                    threads
+sequence:                0x2AA466D3FF0E5BC6
+MF:                      6.32099
+PSL:                     6
+runtime:                 499.088 ms
+CPU time:                952.602 ms
+energy consumption:      26019 mJ
+speed:                   200353 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    99994
+threads:                 16
+algorithm:               Tabu search
+mode:                    threads
+sequence:                0x2AA466D3FF0E5BC6
+MF:                      6.32099
+PSL:                     6
+runtime:                 813.885 ms
+CPU time:                1514.15 ms
+energy consumption:      41774 mJ
+speed:                   122860 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    100000
+threads:                 1
+algorithm:               Random search
+mode:                    threads
+sequence:                0x091E6290FA4BB153
+MF:                      2.70899
+PSL:                     9
+runtime:                 3641.4 ms
+CPU time:                3640.94 ms
+energy consumption:      158877 mJ
+speed:                   27461 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    100000
+threads:                 2
+algorithm:               Random search
+mode:                    threads
+sequence:                0x3C401D4ECA12582C
+MF:                      2.68063
+PSL:                     10
+runtime:                 1823.28 ms
+CPU time:                3643.54 ms
+energy consumption:      95284 mJ
+speed:                   54846 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    100000
+threads:                 4
+algorithm:               Random search
+mode:                    threads
+sequence:                0x911F28D651D2D008
+MF:                      2.81319
+PSL:                     9
+runtime:                 925.231 ms
+CPU time:                3690.7 ms
+energy consumption:      61946 mJ
+speed:                   108081 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    100000
+threads:                 8
+algorithm:               Random search
+mode:                    threads
+sequence:                0xC110A10FDB309ACA
+MF:                      2.99415
+PSL:                     8
+runtime:                 492.686 ms
+CPU time:                3817.59 ms
+energy consumption:      42596 mJ
+speed:                   202969 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    100000
+threads:                 16
+algorithm:               Random search
+mode:                    threads
+sequence:                0x2AEB03D9FB852712
+MF:                      2.81319
+PSL:                     9
+runtime:                 469.576 ms
+CPU time:                6796.58 ms
+energy consumption:      40030 mJ
+speed:                   212958 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    99948
+threads:                 1
+algorithm:               SDLS
+mode:                    threads
+sequence:                0x0A14147D85927399
+MF:                      4.97087
+PSL:                     6
+runtime:                 467.33 ms
+CPU time:                480.574 ms
+energy consumption:      20709 mJ
+speed:                   213870 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    99948
+threads:                 2
+algorithm:               SDLS
+mode:                    threads
+sequence:                0x0A14147D85927399
+MF:                      4.97087
+PSL:                     6
+runtime:                 366.83 ms
+CPU time:                521.556 ms
+energy consumption:      18257 mJ
+speed:                   272464 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    99948
+threads:                 4
+algorithm:               SDLS
+mode:                    threads
+sequence:                0x0A14147D85927399
+MF:                      4.97087
+PSL:                     6
+runtime:                 350.759 ms
+CPU time:                624.607 ms
+energy consumption:      18453 mJ
+speed:                   284948 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    99948
+threads:                 8
+algorithm:               SDLS
+mode:                    threads
+sequence:                0x0A14147D85927399
+MF:                      4.97087
+PSL:                     6
+runtime:                 488.853 ms
+CPU time:                938.902 ms
+energy consumption:      25776 mJ
+speed:                   204454 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    99948
+threads:                 16
+algorithm:               SDLS
+mode:                    threads
+sequence:                0x0A14147D85927399
+MF:                      4.97087
+PSL:                     6
+runtime:                 807.809 ms
+CPU time:                1502.86 ms
+energy consumption:      42063 mJ
+speed:                   123727 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    99993
+threads:                 1
+algorithm:               Tabu search
+mode:                    threads
+sequence:                0xA914480E0EF8896B
+MF:                      4.87619
+PSL:                     8
+runtime:                 567.145 ms
+CPU time:                581.864 ms
+energy consumption:      24868 mJ
+speed:                   176309 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    99993
+threads:                 2
+algorithm:               Tabu search
+mode:                    threads
+sequence:                0xA914480E0EF8896B
+MF:                      4.87619
+PSL:                     8
+runtime:                 425.255 ms
+CPU time:                588.745 ms
+energy consumption:      19851 mJ
+speed:                   235136 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    99993
+threads:                 4
+algorithm:               Tabu search
+mode:                    threads
+sequence:                0xA914480E0EF8896B
+MF:                      4.87619
+PSL:                     8
+runtime:                 358.624 ms
+CPU time:                635.301 ms
+energy consumption:      19473 mJ
+speed:                   278823 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    99993
+threads:                 8
+algorithm:               Tabu search
+mode:                    threads
+sequence:                0xA914480E0EF8896B
+MF:                      4.87619
+PSL:                     8
+runtime:                 504.285 ms
+CPU time:                956.435 ms
+energy consumption:      26417 mJ
+speed:                   198286 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    99993
+threads:                 16
+algorithm:               Tabu search
+mode:                    threads
+sequence:                0xA914480E0EF8896B
+MF:                      4.87619
+PSL:                     8
+runtime:                 828.959 ms
+CPU time:                1531.29 ms
+energy consumption:      42474 mJ
+speed:                   120624 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    100000
+threads:                 1
+algorithm:               Random search
+mode:                    producer/consumer
+sequence:                0x0E5F5063927A66A9
+MF:                      2.76757
+PSL:                     11
+runtime:                 3640.46 ms
+CPU time:                3639.99 ms
+energy consumption:      159860 mJ
+speed:                   27469 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    100000
+threads:                 2
+algorithm:               Random search
+mode:                    producer/consumer
+sequence:                0x1CD4D6D3204E83C5
+MF:                      2.68063
+PSL:                     8
+runtime:                 1833.49 ms
+CPU time:                3655.51 ms
+energy consumption:      94673 mJ
+speed:                   54540 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    100000
+threads:                 4
+algorithm:               Random search
+mode:                    producer/consumer
+sequence:                0x1CD4D6D3204E83C5
+MF:                      2.68063
+PSL:                     8
+runtime:                 940.4 ms
+CPU time:                3739.82 ms
+energy consumption:      62178 mJ
+speed:                   106337 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    100000
+threads:                 8
+algorithm:               Random search
+mode:                    producer/consumer
+sequence:                0xC110A10FDB309ACA
+MF:                      2.99415
+PSL:                     8
+runtime:                 666.087 ms
+CPU time:                4163.19 ms
+energy consumption:      50897 mJ
+speed:                   150130 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    100000
+threads:                 16
+algorithm:               Random search
+mode:                    producer/consumer
+sequence:                0x1CD4D6D3204E83C5
+MF:                      2.68063
+PSL:                     8
+runtime:                 463.786 ms
+CPU time:                6838.82 ms
+energy consumption:      39998 mJ
+speed:                   215616 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    99943
+threads:                 1
+algorithm:               SDLS
+mode:                    producer/consumer
+sequence:                0x4BC3D7BA45DF59CC
+MF:                      4.97087
+PSL:                     6
+runtime:                 639.212 ms
+CPU time:                655.453 ms
+energy consumption:      26945 mJ
+speed:                   156353 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    99943
+threads:                 2
+algorithm:               SDLS
+mode:                    producer/consumer
+sequence:                0x4BC3D7BA45DF59CC
+MF:                      4.97087
+PSL:                     6
+runtime:                 447.807 ms
+CPU time:                610.138 ms
+energy consumption:      21063 mJ
+speed:                   223182 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    99943
+threads:                 4
+algorithm:               SDLS
+mode:                    producer/consumer
+sequence:                0x4BC3D7BA45DF59CC
+MF:                      4.97087
+PSL:                     6
+runtime:                 350.504 ms
+CPU time:                621.485 ms
+energy consumption:      18330 mJ
+speed:                   285140 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    99943
+threads:                 8
+algorithm:               SDLS
+mode:                    producer/consumer
+sequence:                0x4BC3D7BA45DF59CC
+MF:                      4.97087
+PSL:                     6
+runtime:                 489.677 ms
+CPU time:                932.69 ms
+energy consumption:      26317 mJ
+speed:                   204099 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    99943
+threads:                 16
+algorithm:               SDLS
+mode:                    producer/consumer
+sequence:                0x4BC3D7BA45DF59CC
+MF:                      4.97087
+PSL:                     6
+runtime:                 796.631 ms
+CPU time:                1484.43 ms
+energy consumption:      40140 mJ
+speed:                   125457 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    99991
+threads:                 1
+algorithm:               Tabu search
+mode:                    producer/consumer
+sequence:                0x45D367E2FF5A18E7
+MF:                      5.06931
+PSL:                     6
+runtime:                 587.006 ms
+CPU time:                601.549 ms
+energy consumption:      25236 mJ
+speed:                   170340 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    99991
+threads:                 2
+algorithm:               Tabu search
+mode:                    producer/consumer
+sequence:                0x45D367E2FF5A18E7
+MF:                      5.06931
+PSL:                     6
+runtime:                 456.425 ms
+CPU time:                623.651 ms
+energy consumption:      21256 mJ
+speed:                   219074 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    99991
+threads:                 4
+algorithm:               Tabu search
+mode:                    producer/consumer
+sequence:                0x45D367E2FF5A18E7
+MF:                      5.06931
+PSL:                     6
+runtime:                 357.854 ms
+CPU time:                633.026 ms
+energy consumption:      19931 mJ
+speed:                   279418 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    99991
+threads:                 8
+algorithm:               Tabu search
+mode:                    producer/consumer
+sequence:                0x45D367E2FF5A18E7
+MF:                      5.06931
+PSL:                     6
+runtime:                 492.919 ms
+CPU time:                944.385 ms
+energy consumption:      25591 mJ
+speed:                   202854 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    0
+nfes:                    99991
+threads:                 16
+algorithm:               Tabu search
+mode:                    producer/consumer
+sequence:                0x45D367E2FF5A18E7
+MF:                      5.06931
+PSL:                     6
+runtime:                 814.355 ms
+CPU time:                1507.98 ms
+energy consumption:      41827 mJ
+speed:                   122785 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    100000
+threads:                 1
+algorithm:               Random search
+mode:                    producer/consumer
+sequence:                0x1CD4D6D3204E83C5
+MF:                      2.68063
+PSL:                     8
+runtime:                 3642.68 ms
+CPU time:                3642.17 ms
+energy consumption:      163092 mJ
+speed:                   27452 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    100000
+threads:                 2
+algorithm:               Random search
+mode:                    producer/consumer
+sequence:                0x1CD4D6D3204E83C5
+MF:                      2.68063
+PSL:                     8
+runtime:                 1833.14 ms
+CPU time:                3659.01 ms
+energy consumption:      95478 mJ
+speed:                   54551 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    100000
+threads:                 4
+algorithm:               Random search
+mode:                    producer/consumer
+sequence:                0x911F28D651D2D008
+MF:                      2.81319
+PSL:                     9
+runtime:                 931.814 ms
+CPU time:                3717.07 ms
+energy consumption:      62141 mJ
+speed:                   107317 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    100000
+threads:                 8
+algorithm:               Random search
+mode:                    producer/consumer
+sequence:                0xC110A10FDB309ACA
+MF:                      2.99415
+PSL:                     8
+runtime:                 485.471 ms
+CPU time:                3813.37 ms
+energy consumption:      42239 mJ
+speed:                   205985 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    100000
+threads:                 16
+algorithm:               Random search
+mode:                    producer/consumer
+sequence:                0x1CD4D6D3204E83C5
+MF:                      2.68063
+PSL:                     8
+runtime:                 468.157 ms
+CPU time:                6833.25 ms
+energy consumption:      39925 mJ
+speed:                   213603 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    99943
+threads:                 1
+algorithm:               SDLS
+mode:                    producer/consumer
+sequence:                0xD9109097455E390E
+MF:                      5.12
+PSL:                     5
+runtime:                 687.881 ms
+CPU time:                705.621 ms
+energy consumption:      28971 mJ
+speed:                   145291 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    99943
+threads:                 2
+algorithm:               SDLS
+mode:                    producer/consumer
+sequence:                0xD9109097455E390E
+MF:                      5.12
+PSL:                     5
+runtime:                 411.524 ms
+CPU time:                571.848 ms
+energy consumption:      19510 mJ
+speed:                   242860 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    99943
+threads:                 4
+algorithm:               SDLS
+mode:                    producer/consumer
+sequence:                0xD9109097455E390E
+MF:                      5.12
+PSL:                     5
+runtime:                 352.672 ms
+CPU time:                625.687 ms
+energy consumption:      18553 mJ
+speed:                   283388 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    99943
+threads:                 8
+algorithm:               SDLS
+mode:                    producer/consumer
+sequence:                0xD9109097455E390E
+MF:                      5.12
+PSL:                     5
+runtime:                 486.126 ms
+CPU time:                927.537 ms
+energy consumption:      25723 mJ
+speed:                   205590 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    99943
+threads:                 16
+algorithm:               SDLS
+mode:                    producer/consumer
+sequence:                0xD9109097455E390E
+MF:                      5.12
+PSL:                     5
+runtime:                 803.799 ms
+CPU time:                1493.99 ms
+energy consumption:      40796 mJ
+speed:                   124338 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    99994
+threads:                 1
+algorithm:               Tabu search
+mode:                    producer/consumer
+sequence:                0x2AA466D3FF0E5BC6
+MF:                      6.32099
+PSL:                     6
+runtime:                 596.107 ms
+CPU time:                611.237 ms
+energy consumption:      25741 mJ
+speed:                   167745 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    99994
+threads:                 2
+algorithm:               Tabu search
+mode:                    producer/consumer
+sequence:                0x2AA466D3FF0E5BC6
+MF:                      6.32099
+PSL:                     6
+runtime:                 400.26 ms
+CPU time:                564.412 ms
+energy consumption:      19036 mJ
+speed:                   249822 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    99994
+threads:                 4
+algorithm:               Tabu search
+mode:                    producer/consumer
+sequence:                0x2AA466D3FF0E5BC6
+MF:                      6.32099
+PSL:                     6
+runtime:                 352.42 ms
+CPU time:                626.204 ms
+energy consumption:      19405 mJ
+speed:                   283734 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    99994
+threads:                 8
+algorithm:               Tabu search
+mode:                    producer/consumer
+sequence:                0x2AA466D3FF0E5BC6
+MF:                      6.32099
+PSL:                     6
+runtime:                 497.639 ms
+CPU time:                949.609 ms
+energy consumption:      25944 mJ
+speed:                   200936 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    1
+nfes:                    99994
+threads:                 16
+algorithm:               Tabu search
+mode:                    producer/consumer
+sequence:                0x2AA466D3FF0E5BC6
+MF:                      6.32099
+PSL:                     6
+runtime:                 815.676 ms
+CPU time:                1514.51 ms
+energy consumption:      41592 mJ
+speed:                   122590 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    100000
+threads:                 1
+algorithm:               Random search
+mode:                    producer/consumer
+sequence:                0x091E6290FA4BB153
+MF:                      2.70899
+PSL:                     9
+runtime:                 3622.53 ms
+CPU time:                3621.84 ms
+energy consumption:      160954 mJ
+speed:                   27604 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    100000
+threads:                 2
+algorithm:               Random search
+mode:                    producer/consumer
+sequence:                0x3C401D4ECA12582C
+MF:                      2.68063
+PSL:                     10
+runtime:                 1838.97 ms
+CPU time:                3675.69 ms
+energy consumption:      93937 mJ
+speed:                   54378 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    100000
+threads:                 4
+algorithm:               Random search
+mode:                    producer/consumer
+sequence:                0x911F28D651D2D008
+MF:                      2.81319
+PSL:                     9
+runtime:                 928.726 ms
+CPU time:                3709.2 ms
+energy consumption:      62271 mJ
+speed:                   107674 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    100000
+threads:                 8
+algorithm:               Random search
+mode:                    producer/consumer
+sequence:                0xC110A10FDB309ACA
+MF:                      2.99415
+PSL:                     8
+runtime:                 590.105 ms
+CPU time:                4027.15 ms
+energy consumption:      47612 mJ
+speed:                   169461 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    100000
+threads:                 16
+algorithm:               Random search
+mode:                    producer/consumer
+sequence:                0x2AEB03D9FB852712
+MF:                      2.81319
+PSL:                     9
+runtime:                 464.456 ms
+CPU time:                6791.99 ms
+energy consumption:      39825 mJ
+speed:                   215305 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    99948
+threads:                 1
+algorithm:               SDLS
+mode:                    producer/consumer
+sequence:                0x0A14147D85927399
+MF:                      4.97087
+PSL:                     6
+runtime:                 649.848 ms
+CPU time:                666.461 ms
+energy consumption:      27122 mJ
+speed:                   153802 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    99948
+threads:                 2
+algorithm:               SDLS
+mode:                    producer/consumer
+sequence:                0x0A14147D85927399
+MF:                      4.97087
+PSL:                     6
+runtime:                 384.708 ms
+CPU time:                543.893 ms
+energy consumption:      18373 mJ
+speed:                   259801 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    99948
+threads:                 4
+algorithm:               SDLS
+mode:                    producer/consumer
+sequence:                0x0A14147D85927399
+MF:                      4.97087
+PSL:                     6
+runtime:                 355.11 ms
+CPU time:                629.599 ms
+energy consumption:      18666 mJ
+speed:                   281456 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    99948
+threads:                 8
+algorithm:               SDLS
+mode:                    producer/consumer
+sequence:                0x0A14147D85927399
+MF:                      4.97087
+PSL:                     6
+runtime:                 492.385 ms
+CPU time:                934.358 ms
+energy consumption:      26855 mJ
+speed:                   202987 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    99948
+threads:                 16
+algorithm:               SDLS
+mode:                    producer/consumer
+sequence:                0x0A14147D85927399
+MF:                      4.97087
+PSL:                     6
+runtime:                 803.394 ms
+CPU time:                1494.28 ms
+energy consumption:      41124 mJ
+speed:                   124407 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    99993
+threads:                 1
+algorithm:               Tabu search
+mode:                    producer/consumer
+sequence:                0xA914480E0EF8896B
+MF:                      4.87619
+PSL:                     8
+runtime:                 591.724 ms
+CPU time:                606.837 ms
+energy consumption:      25279 mJ
+speed:                   168985 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    99993
+threads:                 2
+algorithm:               Tabu search
+mode:                    producer/consumer
+sequence:                0xA914480E0EF8896B
+MF:                      4.87619
+PSL:                     8
+runtime:                 396.907 ms
+CPU time:                556.048 ms
+energy consumption:      18898 mJ
+speed:                   251930 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    99993
+threads:                 4
+algorithm:               Tabu search
+mode:                    producer/consumer
+sequence:                0xA914480E0EF8896B
+MF:                      4.87619
+PSL:                     8
+runtime:                 358.985 ms
+CPU time:                635.112 ms
+energy consumption:      19659 mJ
+speed:                   278543 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    99993
+threads:                 8
+algorithm:               Tabu search
+mode:                    producer/consumer
+sequence:                0xA914480E0EF8896B
+MF:                      4.87619
+PSL:                     8
+runtime:                 493.037 ms
+CPU time:                948.048 ms
+energy consumption:      25948 mJ
+speed:                   202810 nfes/s
+
+-----------------------------------------------------
+L:                       64
+seed:                    2
+nfes:                    99993
+threads:                 16
+algorithm:               Tabu search
+mode:                    producer/consumer
+sequence:                0xA914480E0EF8896B
+MF:                      4.87619
+PSL:                     8
+runtime:                 807.848 ms
+CPU time:                1512.77 ms
+energy consumption:      41341 mJ
+speed:                   123777 nfes/s
+
+-----------------------------------------------------
+ALGORITHM       THREADS ENERGY      SPEED       SEED            PARALLEL MODE
+  ------------------------------------------------------------------------------------------
+Random search   1       100.00%     100.00%     0               Threads         
+Random search   2       57.81%      198.12%     0               Threads         
+Random search   4       37.38%      385.96%     0               Threads         
+Random search   8       25.98%      716.66%     0               Threads         
+Random search   16      23.00%      820.99%     0               Threads         
+SDLS            1       15.18%      614.07%     0               Threads         
+SDLS            2       11.94%      848.29%     0               Threads         
+SDLS            4       11.06%      1030.22%    0               Threads         
+SDLS            8       15.67%      740.87%     0               Threads         
+SDLS            16      24.53%      450.09%     0               Threads         
+Tabu search     1       14.36%      657.88%     0               Threads         
+Tabu search     2       12.91%      771.80%     0               Threads         
+Tabu search     4       11.49%      1019.34%    0               Threads         
+Tabu search     8       15.42%      733.99%     0               Threads         
+Tabu search     16      24.87%      445.02%     0               Threads         
+Random search   1       96.39%      99.13%      1               Threads         
+Random search   2       56.79%      196.92%     1               Threads         
+Random search   4       37.84%      383.02%     1               Threads         
+Random search   8       25.85%      720.44%     1               Threads         
+Random search   16      23.54%      789.50%     1               Threads         
+SDLS            1       16.64%      550.90%     1               Threads         
+SDLS            2       11.81%      861.28%     1               Threads         
+SDLS            4       10.67%      1037.02%    1               Threads         
+SDLS            8       15.87%      731.14%     1               Threads         
+SDLS            16      24.93%      446.21%     1               Threads         
+Tabu search     1       15.19%      606.99%     1               Threads         
+Tabu search     2       12.21%      850.53%     1               Threads         
+Tabu search     4       11.66%      1002.79%    1               Threads         
+Tabu search     8       15.58%      722.93%     1               Threads         
+Tabu search     16      25.01%      443.31%     1               Threads         
+Random search   1       95.14%      99.09%      2               Threads         
+Random search   2       57.06%      197.90%     2               Threads         
+Random search   4       37.09%      389.99%     2               Threads         
+Random search   8       25.51%      732.37%     2               Threads         
+Random search   16      23.97%      768.41%     2               Threads         
+SDLS            1       12.40%      771.70%     2               Threads         
+SDLS            2       10.93%      983.13%     2               Threads         
+SDLS            4       11.05%      1028.17%    2               Threads         
+SDLS            8       15.43%      737.73%     2               Threads         
+SDLS            16      25.19%      446.44%     2               Threads         
+Tabu search     1       14.89%      636.17%     2               Threads         
+Tabu search     2       11.89%      848.44%     2               Threads         
+Tabu search     4       11.66%      1006.07%    2               Threads         
+Tabu search     8       15.82%      715.47%     2               Threads         
+Tabu search     16      25.43%      435.25%     2               Threads         
+Random search   1       95.72%      99.12%      0               Producer/consumer
+Random search   2       56.69%      196.80%     0               Producer/consumer
+Random search   4       37.23%      383.69%     0               Producer/consumer
+Random search   8       30.48%      541.71%     0               Producer/consumer
+Random search   16      23.95%      778.00%     0               Producer/consumer
+SDLS            1       16.13%      564.17%     0               Producer/consumer
+SDLS            2       12.61%      805.30%     0               Producer/consumer
+SDLS            4       10.98%      1028.87%    0               Producer/consumer
+SDLS            8       15.76%      736.45%     0               Producer/consumer
+SDLS            16      24.04%      452.68%     0               Producer/consumer
+Tabu search     1       15.11%      614.64%     0               Producer/consumer
+Tabu search     2       12.73%      790.48%     0               Producer/consumer
+Tabu search     4       11.93%      1008.22%    0               Producer/consumer
+Tabu search     8       15.32%      731.95%     0               Producer/consumer
+Tabu search     16      25.05%      443.04%     0               Producer/consumer
+Random search   1       97.66%      99.05%      1               Producer/consumer
+Random search   2       57.17%      196.84%     1               Producer/consumer
+Random search   4       37.21%      387.23%     1               Producer/consumer
+Random search   8       25.29%      743.25%     1               Producer/consumer
+Random search   16      23.91%      770.74%     1               Producer/consumer
+SDLS            1       17.35%      524.25%     1               Producer/consumer
+SDLS            2       11.68%      876.31%     1               Producer/consumer
+SDLS            4       11.11%      1022.54%    1               Producer/consumer
+SDLS            8       15.40%      741.83%     1               Producer/consumer
+SDLS            16      24.43%      448.65%     1               Producer/consumer
+Tabu search     1       15.41%      605.27%     1               Producer/consumer
+Tabu search     2       11.40%      901.43%     1               Producer/consumer
+Tabu search     4       11.62%      1023.79%    1               Producer/consumer
+Tabu search     8       15.54%      725.03%     1               Producer/consumer
+Tabu search     16      24.91%      442.34%     1               Producer/consumer
+Random search   1       96.38%      99.60%      2               Producer/consumer
+Random search   2       56.25%      196.21%     2               Producer/consumer
+Random search   4       37.29%      388.52%     2               Producer/consumer
+Random search   8       28.51%      611.46%     2               Producer/consumer
+Random search   16      23.85%      776.88%     2               Producer/consumer
+SDLS            1       16.24%      554.96%     2               Producer/consumer
+SDLS            2       11.00%      937.44%     2               Producer/consumer
+SDLS            4       11.18%      1015.57%    2               Producer/consumer
+SDLS            8       16.08%      732.43%     2               Producer/consumer
+SDLS            16      24.63%      448.90%     2               Producer/consumer
+Tabu search     1       15.14%      609.75%     2               Producer/consumer
+Tabu search     2       11.32%      909.04%     2               Producer/consumer
+Tabu search     4       11.77%      1005.06%    2               Producer/consumer
+Tabu search     8       15.54%      731.80%     2               Producer/consumer
+Tabu search     16      24.75%      446.62%     2               Producer/consumer
+-----------------------------------------
+BEST SEQUENCE FOUND:                     
+sequence:                0xA914480E0EF8896B
+MF:                      4.87619
+PSL:                     8
+runtime:                 807.848 ms
+CPU time:                1512.77 ms
+energy consumption:      41341 mJ
+speed:                   123777 nfes/s
+nfesLmt:                 100000
+max number of threads:   16
+
